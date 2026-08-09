@@ -10,7 +10,7 @@ export const portfolioData = {
   linkedin: "", // To be added later
   calendly: "https://calendly.com/carlocalubs/30min",
   profileImage: "/jc-logo.png",
-  profileVideo: null,
+  profileVideo: "/My-DP.mp4",
   
   // Hero Section
   hero: {
