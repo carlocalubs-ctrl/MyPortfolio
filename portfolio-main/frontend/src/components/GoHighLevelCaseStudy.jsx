@@ -176,13 +176,10 @@ export const GoHighLevelCaseStudy = () => {
             <div className="flex gap-2 overflow-x-auto py-3 lg:justify-center mg:justify-center sm:justify-start">
               <Link
                 to="/#works"
-                className="lg:absolute lg:left-[220px] self-center inline-flex items-center gap-2 text-sm font-medium text-teal-300 transition-colors hover:text-teal-200"
+                className="self-center inline-flex items-center gap-2 text-sm font-medium text-teal-300 transition-colors hover:text-teal-200 py-3"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="lg:hidden zh-4 w-4" />
                 <span className="lg:hidden">Back</span>
-                <span className="hidden lg:inline">
-                  Back to Featured Projects
-                </span>
               </Link>
               {projectSections.map((item) => (
                 <button
@@ -198,6 +195,17 @@ export const GoHighLevelCaseStudy = () => {
         </nav>
         <main className="pt-16">
           <section className="relative overflow-hidden pt-10 pb-20 sm:pt-5 sm:pb-24">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 min-[640px]:max-[768px]:hidden">
+              <Link
+                to="/#works"
+                className="self-center inline-flex items-center gap-2 text-sm font-medium text-teal-300 transition-colors hover:text-teal-200 py-3"
+              >
+                <ArrowLeft className="hidden lg:inline h-4 w-4" />
+                <span className="hidden lg:inline">
+                  Back to Featured Projects
+                </span>
+              </Link>
+            </div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
                 <div className="mx-auto max-w-5xl text-center">

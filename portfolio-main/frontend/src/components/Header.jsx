@@ -1,7 +1,7 @@
-import { Button } from './ui/button';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Button } from "./ui/button";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -9,7 +9,7 @@ export const Header = () => {
   const navigate = useNavigate();
 
   const scrollToSection = (sectionId) => {
-    if (location.pathname !== '/') {
+    if (location.pathname !== "/") {
       navigate(`/#${sectionId}`);
       setMobileMenuOpen(false);
       return;
@@ -17,18 +17,18 @@ export const Header = () => {
 
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setMobileMenuOpen(false);
     }
   };
 
   const navItems = [
-    { label: 'Home', id: 'hero' },
-    { label: 'Services', id: 'services' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Works', id: 'works' },
-    { label: 'Testimonials', id: 'testimonials' },
-    { label: 'Contact', id: 'contact' }
+    { label: "Home", id: "hero" },
+    { label: "Services", id: "services" },
+    { label: "Experience", id: "experience" },
+    { label: "Works", id: "works" },
+    { label: "Testimonials", id: "testimonials" },
+    { label: "Contact", id: "contact" },
   ];
 
   return (
@@ -38,7 +38,7 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <button
-              onClick={() => scrollToSection('hero')}
+              onClick={() => scrollToSection("hero")}
               className="text-xl font-bold bg-gradient-to-r from-teal-400 to-emerald-400 bg-clip-text text-transparent hover:from-teal-300 hover:to-emerald-300 transition-all duration-300"
             >
               John Carlo R. Calubiran
@@ -46,7 +46,7 @@ export const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -59,9 +59,9 @@ export const Header = () => {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <Button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => scrollToSection("contact")}
               className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium"
             >
               Get In Touch
@@ -71,7 +71,7 @@ export const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-slate-300 hover:text-teal-400 transition-colors"
+            className="lg:hidden p-2 text-slate-300 hover:text-teal-400 transition-colors"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -91,7 +91,7 @@ export const Header = () => {
                 </button>
               ))}
               <Button
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection("contact")}
                 className="mx-4 mt-2 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white"
               >
                 Get In Touch
