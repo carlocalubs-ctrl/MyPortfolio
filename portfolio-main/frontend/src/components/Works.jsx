@@ -120,12 +120,26 @@ export const Works = () => {
                     <div className="absolute -inset-1 bg-gradient-to-r from-teal-500/0 via-emerald-500/30 to-cyan-500/0 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></div>
 
                     <div className="relative aspect-[16/10] overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        loading="lazy"
-                      />
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-slate-800 via-slate-900 to-teal-950 flex items-center justify-center p-8">
+                          <div className="text-center">
+                            <Code2 className="w-12 h-12 text-teal-300 mx-auto mb-4" />
+                            <div className="text-white text-xl sm:text-2xl font-semibold leading-tight">
+                              {project.title}
+                            </div>
+                            <div className="mt-3 text-teal-300 text-sm font-medium">
+                              {project.category}
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       {/* Dark overlay on hover */}
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
@@ -249,11 +263,22 @@ export const Works = () => {
             className="relative max-w-7xl w-full max-h-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={lightboxImage.image}
-              alt={lightboxImage.title}
-              className="w-full h-auto max-h-[80vh] object-contain rounded-lg shadow-2xl"
-            />
+            {lightboxImage.image ? (
+              <img
+                src={lightboxImage.image}
+                alt={lightboxImage.title}
+                className="w-full h-auto max-h-[80vh] object-contain rounded-lg shadow-2xl"
+              />
+            ) : (
+              <div className="aspect-[16/10] rounded-lg shadow-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-teal-950 flex items-center justify-center p-8">
+                <div className="text-center">
+                  <Code2 className="w-16 h-16 text-teal-300 mx-auto mb-5" />
+                  <div className="text-white text-2xl sm:text-4xl font-semibold leading-tight">
+                    {lightboxImage.title}
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="mt-4 text-center">
               <h3 className="text-white text-xl font-semibold mb-1">
                 {lightboxImage.title}

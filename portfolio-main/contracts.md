@@ -182,7 +182,7 @@ const handleSubmit = async (e) => {
 
 ## Environment Variables
 No additional environment variables needed. Using existing:
-- `REACT_APP_BACKEND_URL` - Already configured
+- `VITE_BACKEND_URL` - Already configured for the frontend
 - `MONGO_URL` - Already configured
 
 ---

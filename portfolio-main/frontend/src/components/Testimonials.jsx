@@ -36,11 +36,20 @@ export const Testimonials = () => {
               <div className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left: Full Photo */}
                 <div className="relative bg-slate-900 min-h-[400px] md:min-h-[520px]">
-                  <img
-                    src={featured.fullImage || featured.avatar}
-                    alt={`John Carlo with ${featured.name}`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
+                  {featured.fullImage || featured.avatar ? (
+                    <img
+                      src={featured.fullImage || featured.avatar}
+                      alt={`John Carlo with ${featured.name}`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 flex items-center justify-center">
+                      <div className="text-center px-8">
+                        <Quote className="w-16 h-16 text-teal-300 mx-auto mb-5" />
+                        <div className="text-white text-3xl font-bold">Client Feedback</div>
+                      </div>
+                    </div>
+                  )}
                   {/* Soft right-edge gradient to blend into card */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-800/40 md:to-slate-800/60 pointer-events-none"></div>
 

@@ -3,7 +3,7 @@ import { ArrowRight, Download, Zap, Bot } from 'lucide-react';
 import { portfolioData } from '../mockData';
 
 export const Hero = () => {
-  const { hero, profileVideo } = portfolioData;
+  const { hero, profileImage, profileVideo } = portfolioData;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -108,18 +108,28 @@ export const Hero = () => {
                   
                   {/* Video Container - Rounded square, shows full video */}
                   <div className="absolute inset-[4px] rounded-3xl overflow-hidden bg-slate-900 z-10 flex items-center justify-center">
-                    <video
-                      src={profileVideo}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-contain animate-scale-in"
-                      style={{ 
-                        mixBlendMode: 'screen',
-                        filter: 'contrast(1.15) brightness(1.05) saturate(1.1)'
-                      }}
-                    />
+                    {profileVideo ? (
+                      <video
+                        src={profileVideo}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-contain animate-scale-in"
+                        style={{
+                          mixBlendMode: 'screen',
+                          filter: 'contrast(1.15) brightness(1.05) saturate(1.1)'
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950">
+                        <img
+                          src={profileImage}
+                          alt="John Carlo R. Calubiran"
+                          className="w-2/3 h-2/3 object-contain animate-scale-in drop-shadow-2xl"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   {/* Decorative Rotating Ring (subtle) */}

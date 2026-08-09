@@ -14,7 +14,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 const Home = () => {
   return (
-    <div className="min-h-screen relative" style={{ background: '#0f172a' }}>
+    <div className="min-h-screen relative" style={{ background: "#0f172a" }}>
       <AnimatedBackground />
       <div className="relative z-10">
         <Header />
