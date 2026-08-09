@@ -1,0 +1,199 @@
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    cursor: none;
+}
+
+/* Restore default cursor on mobile */
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+    .custom-cursor,
+    .custom-cursor-dot {
+        display: none !important;
+    }
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(20, 184, 166, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.custom-cursor-dot {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: #14b8a6;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s ease-out;
+}
+
+.custom-cursor.cursor-hover {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(20, 184, 166, 0.15);
+    border-color: rgba(16, 185, 129, 0.8);
+}
+
+.custom-cursor.cursor-click {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* Animated background grid - REMOVED, replaced by canvas network */
+
+/* Floating particles background - REMOVED, replaced by canvas network */
+
+/* Moving gradient orbs - REMOVED, replaced by canvas network */
+
+/* Animated blob effect */
+@keyframes blob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* Floating animation for profile picture */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse glow animation */
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Scale up animation on load */
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.8s ease-out;
+}
+
+/* Profile picture border animation */
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.profile-border-glow {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(
+        45deg,
+        #14b8a6,
+        #10b981,
+        #06b6d4,
+        #14b8a6,
+        #10b981
+    );
+    background-size: 300% 300%;
+    animation: borderRotate 6s ease infinite;
+    z-index: -1;
+}
+
+/* Hide cursor on interactive elements - we have custom one */
+a, button, input, textarea, select {
+    cursor: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #14b8a6, #10b981);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #0d9488, #059669);
+}
+
+/* Remove default App styles that might interfere */
+.App {
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Selection color */
+::selection {
+    background-color: rgba(20, 184, 166, 0.3);
+    color: #ffffff;
+}
