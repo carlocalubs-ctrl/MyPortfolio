@@ -1,5 +1,6 @@
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
@@ -11,6 +12,24 @@ import { Footer } from "@/components/Footer";
 import { CustomCursor } from "@/components/CustomCursor";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { Toaster } from "@/components/ui/sonner";
+import { GoHighLevelCaseStudy } from "@/components/GoHighLevelCaseStudy";
+
+const HashScroll = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const id = location.hash.slice(1);
+    const timeout = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 80);
+
+    return () => window.clearTimeout(timeout);
+  }, [location.pathname, location.hash]);
+
+  return null;
+};
 
 const Home = () => {
   return (
@@ -37,8 +56,10 @@ function App() {
     <div className="App">
       <CustomCursor />
       <BrowserRouter>
+        <HashScroll />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/projects/gohighlevel-crm-marketing-automation" element={<GoHighLevelCaseStudy />} />
         </Routes>
       </BrowserRouter>
       <Toaster position="top-right" />

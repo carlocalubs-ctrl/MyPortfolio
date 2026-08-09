@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Headset, Bot, Plug, Database, Check } from 'lucide-react';
+import { Headset, Bot, Plug, Database, Check, Workflow } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { ScrollReveal } from '../hooks/useScrollReveal';
 
@@ -7,7 +7,8 @@ const iconMap = {
   headset: Headset,
   bot: Bot,
   plug: Plug,
-  database: Database
+  database: Database,
+  workflow: Workflow
 };
 
 export const Services = () => {

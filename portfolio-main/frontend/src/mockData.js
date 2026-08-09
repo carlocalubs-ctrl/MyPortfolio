@@ -3,7 +3,7 @@
 export const portfolioData = {
   // Personal Info
   name: "John Carlo R. Calubiran",
-  title: "Automation Specialist",
+  title: "GoHighLevel & AI Automation Specialist",
   tagline: "Transforming Business Operations Through Intelligent Automation",
   email: "carlocalubs@gmail.com",
   phone: "+639565229350",
@@ -15,7 +15,7 @@ export const portfolioData = {
   // Hero Section
   hero: {
     title: "John Carlo R. Calubiran",
-    subtitle: "Automation Specialist",
+    subtitle: "GoHighLevel & AI Automation Specialist",
     description: "Empowering businesses with AI-driven automation solutions, seamless API integrations, and customer service excellence.",
   },
 
@@ -44,6 +44,22 @@ export const portfolioData = {
     },
     {
       id: 4,
+      title: "GoHighLevel",
+      description: "Complete CRM, sales, marketing, and automation systems built around your business process.",
+      features: [
+        "CRM Setup & Optimization",
+        "Funnels & Landing Pages",
+        "Sales Pipelines",
+        "Workflows & Automations",
+        "Calendars & Appointment Booking",
+        "Forms & Surveys",
+        "Email & SMS Automation",
+        "Lead Nurturing & Follow-Ups"
+      ],
+      icon: "workflow"
+    },
+    {
+      id: 5,
       title: "CRM Integration",
       description: "Connect and optimize your CRM systems for better customer relationships, data management, and business insights.",
       features: ["CRM Setup", "Data Migration", "Custom Workflows", "Analytics"],
@@ -118,6 +134,18 @@ export const portfolioData = {
   projects: [
     {
       id: 1,
+      title: "GoHighLevel CRM & Marketing Automation",
+      description: "Built an end-to-end GoHighLevel system for a solar business, including CRM setup, lead capture, sales pipelines, funnels, appointment scheduling, workflows, and automated customer follow-ups.",
+      category: "GoHighLevel",
+      technologies: ["GoHighLevel", "CRM", "Funnels", "Pipelines", "Workflows", "Calendars", "Marketing Automation"],
+      image: "/gohighlevel-thumbnail.png",
+      video: null,
+      demoUrl: null,
+      caseStudyPath: "/projects/gohighlevel-crm-marketing-automation",
+      status: "live"
+    },
+    {
+      id: 2,
       title: "Auto Post Weather Status to SocMed and save to Gdrive",
       description: "Automated workflow using n8n that fetches real-time weather data from AccuWeather, generates social media content via AI Agent (Google Gemini), creates images using Nano Banana via APIFree, and publishes to Facebook, Instagram, and Twitter while saving everything to Google Drive.",
       category: "n8n Automation",
@@ -127,7 +155,7 @@ export const portfolioData = {
       status: "live"
     },
     {
-      id: 2,
+      id: 3,
       title: "Gmail Integration & Document Processing",
       description: "Make.com (formerly Integromat) automation that watches incoming emails, extracts attachments, uploads files to Google Drive, generates AI-powered responses, logs data to Google Sheets, and sends follow-up emails — all hands-free.",
       category: "Make Automation",
@@ -137,7 +165,7 @@ export const portfolioData = {
       status: "live"
     },
     {
-      id: 3,
+      id: 4,
       title: "AI-Powered Content Distribution Pipeline",
       description: "Zapier multi-step workflow that monitors Google Drive for new files, uses AI by Zapier to transcribe video/audio, analyzes content, then intelligently distributes posts to Instagram and LinkedIn with proper formatting and scheduling.",
       category: "Zapier Automation",
@@ -147,7 +175,7 @@ export const portfolioData = {
       status: "live"
     },
     {
-      id: 4,
+      id: 5,
       title: "Asana & Xero Task-to-Invoice Sync Automation",
       description: "Make.com workflow that watches completed Asana tasks, makes API calls to Xero for invoice data, routes through an iterator and router, syncs data to Google Sheets, creates CSV reports, and uploads attachments back to Asana — fully automating the task-to-invoice reporting cycle.",
       category: "Make Automation",

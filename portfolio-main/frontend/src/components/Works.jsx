@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { PlayCircle, X, ZoomIn, ArrowUpRight, Code2 } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { ScrollReveal } from '../hooks/useScrollReveal';
+import { toast } from 'sonner';
 
 export const Works = () => {
   const { projects } = portfolioData;
@@ -207,7 +209,35 @@ export const Works = () => {
 
                   {/* Actions */}
                   <div className="flex flex-wrap items-center gap-3">
-                    {project.video ? (
+                    {project.caseStudyPath ? (
+                      <>
+                        <Button
+                          asChild
+                          data-testid={`project-explore-${project.id}`}
+                          className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium px-6 group"
+                        >
+                          <Link to={project.caseStudyPath}>
+                            Explore Project
+                            <ArrowUpRight className="w-4 h-4 ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                          </Link>
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            if (project.demoUrl) {
+                              window.open(project.demoUrl, '_blank', 'noopener,noreferrer');
+                            } else {
+                              toast.info('Demo video will be added soon.');
+                            }
+                          }}
+                          data-testid={`project-watch-demo-${project.id}`}
+                          variant="outline"
+                          className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white px-6 group"
+                        >
+                          <PlayCircle className="w-4 h-4 mr-2" />
+                          Watch Demo
+                        </Button>
+                      </>
+                    ) : project.video ? (
                       <Button
                         onClick={() => setVideoProject(project)}
                         data-testid={`project-watch-demo-${project.id}`}
