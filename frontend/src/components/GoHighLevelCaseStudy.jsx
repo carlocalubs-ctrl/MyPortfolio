@@ -173,7 +173,7 @@ export const GoHighLevelCaseStudy = () => {
         <Header />
         <nav className="sticky top-16 z-30 backdrop-blur-md">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex gap-2 overflow-x-auto py-3 lg:justify-center mg:justify-center sm:justify-start">
+            <div className="flex gap-2 overflow-x-auto py-3 md:justify-center sm:justify-start">
               <Link
                 to="/#works"
                 className="self-center inline-flex items-center gap-2 text-sm font-medium text-teal-300 transition-colors hover:text-teal-200 py-3"
@@ -235,8 +235,8 @@ export const GoHighLevelCaseStudy = () => {
           <section id="overview" className="scroll-mt-32 py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <ScrollReveal>
-                <Card className="mx-auto max-w-6xl border-slate-700 bg-slate-800/50 backdrop-blur-sm">
-                  <CardHeader className="text-center">
+                <Card className="project-overview-card mx-auto max-w-6xl border-slate-700 bg-slate-800/50 backdrop-blur-sm">
+                  <CardHeader className="project-overview-header text-center">
                     <CardTitle className="text-3xl text-white sm:text-4xl">
                       Project Overview
                     </CardTitle>
@@ -246,15 +246,15 @@ export const GoHighLevelCaseStudy = () => {
                       follow-ups into one centralized CRM environment.
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+                  <CardContent className="project-overview-content">
+                    <div className="project-overview-flow grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
                       {processSteps.map((step, index) => (
                         <div
                           key={step}
-                          className="flex items-center gap-3 lg:block"
+                          className="project-overview-step flex items-center gap-3 lg:block"
                         >
-                          <div className="rounded-lg border border-teal-500/20 bg-slate-900/70 p-4 text-center transition-all hover:border-teal-500/50">
-                            <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 text-sm font-bold text-teal-300">
+                          <div className="project-overview-step-card rounded-lg border border-teal-500/20 bg-slate-900/70 p-4 text-center transition-all hover:border-teal-500/50">
+                            <div className="project-overview-number mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 text-sm font-bold text-teal-300">
                               {index + 1}
                             </div>
                             <div className="text-sm font-semibold text-white">
@@ -262,7 +262,7 @@ export const GoHighLevelCaseStudy = () => {
                             </div>
                           </div>
                           {index < processSteps.length - 1 && (
-                            <ArrowRight className="hidden h-5 w-5 text-teal-400 lg:mx-auto lg:mt-3 lg:block" />
+                            <ArrowRight className="project-overview-arrow hidden h-5 w-5 text-teal-400 lg:mx-auto lg:mt-3 lg:block" />
                           )}
                         </div>
                       ))}

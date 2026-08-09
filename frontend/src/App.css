@@ -192,6 +192,73 @@ a, button, input, textarea, select {
     position: relative;
 }
 
+/* Project overview flow */
+.project-overview-flow {
+    align-items: stretch;
+}
+
+.project-overview-step {
+    min-width: 0;
+}
+
+.project-overview-step-card {
+    width: 100%;
+    min-height: 132px;
+}
+
+@media (max-width: 1023px) {
+    .project-overview-card {
+        max-width: 44rem;
+    }
+
+    .project-overview-content {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .project-overview-step {
+        align-items: stretch;
+    }
+
+    .project-overview-step-card {
+        min-height: 116px;
+    }
+}
+
+@media (max-width: 640px) {
+    .project-overview-card {
+        border-radius: 0.75rem;
+    }
+
+    .project-overview-header {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .project-overview-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .project-overview-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .project-overview-step-card {
+        display: flex;
+        min-height: 0;
+        align-items: center;
+        gap: 0.875rem;
+        padding: 0.875rem;
+        text-align: left;
+    }
+
+    .project-overview-number {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+}
+
 /* Selection color */
 ::selection {
     background-color: rgba(20, 184, 166, 0.3);
