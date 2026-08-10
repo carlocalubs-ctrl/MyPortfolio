@@ -35,12 +35,12 @@ export const Testimonials = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left: Full Photo */}
-                <div className="relative bg-slate-900 min-h-[400px] md:min-h-[520px]">
-                  {featured.fullImage || featured.avatar ? (
+                <div className="relative h-72 bg-slate-900 sm:h-80 md:h-auto md:min-h-[520px]">
+                  {featured.fullImage ? (
                     <img
-                      src={featured.fullImage || featured.avatar}
+                      src={featured.fullImage}
                       alt={`John Carlo with ${featured.name}`}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 block h-full w-full object-cover object-center"
                     />
                   ) : (
                     <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 flex items-center justify-center">
@@ -62,11 +62,8 @@ export const Testimonials = () => {
 
                 {/* Right: Text Content */}
                 <CardContent className="p-8 md:p-10 flex flex-col justify-center">
-                  {/* Initials bubble + Quote icon row */}
+                  {/* Quote icon row */}
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500/30 to-emerald-500/30 border-2 border-teal-500/40 flex items-center justify-center text-teal-300 font-bold text-lg flex-shrink-0">
-                      {featured.name.split(' ').map((n) => n[0]).join('').slice(0, 2)}
-                    </div>
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center">
                       <Quote className="w-6 h-6 text-teal-400" />
                     </div>
@@ -108,7 +105,7 @@ export const Testimonials = () => {
 
         {/* Regular Testimonials Grid */}
         {regular.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {regular.map((testimonial, idx) => (
               <ScrollReveal key={testimonial.id} delay={idx * 100}>
               <Card
@@ -134,8 +131,17 @@ export const Testimonials = () => {
                   </p>
 
                   <div className="border-t border-slate-700 pt-4 flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/30 to-emerald-500/30 flex items-center justify-center text-teal-300 font-semibold flex-shrink-0">
-                      {testimonial.name.split(' ').map((n) => n[0]).join('').slice(0, 2)}
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/30 to-emerald-500/30 flex items-center justify-center text-teal-300 font-semibold flex-shrink-0 overflow-hidden">
+                      {testimonial.avatar ? (
+                        <img
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        testimonial.name.split(' ').map((n) => n[0]).join('').slice(0, 2)
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-semibold text-white mb-0.5 truncate">{testimonial.name}</div>

@@ -249,7 +249,7 @@ export const portfolioData = {
           title: "AI Voice Receptionist & GoHighLevel Automation",
           description: "AI-powered inbound call automation using Vapi, Twilio, n8n, APIs, and GoHighLevel to capture leads, manage callbacks, update CRM records, and support appointment workflows.",
           status: "Live",
-          image: "/projects/thumbnail/THUMBNAIL%20n8n.png",
+          image: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/n8n - GoHighLevel - Vapi_AI_Receptionist.png",
           technologies: ["n8n", "Vapi AI", "GoHighLevel", "Twilio", "REST API", "Webhooks"],
           path: "/projects/n8n/ai-voice-receptionist",
           demoPath: "/projects/n8n/ai-voice-receptionist#demo",
@@ -515,7 +515,7 @@ export const portfolioData = {
   testimonials: [
     {
       id: 1,
-      name: "Flora Mcgrath",
+      name: "Flora McGrath",
       position: "AGL Contact Manager",
       company: "AGL Retailer Australia",
       content: "John Carlo is an exceptional team member with outstanding customer service skills. His dedication to learning AI automation and applying it to our QA processes has significantly improved our team's efficiency. A true asset to any organization.",
@@ -523,7 +523,7 @@ export const portfolioData = {
       avatar: null,
       avatarPosition: "right center",
       featured: true,
-      fullImage: null
+      fullImage: "/projects/thumbnail/MY PICTURE.jpg"
     },
     {
       id: 2,
@@ -540,6 +540,15 @@ export const portfolioData = {
       company: "Global Services Inc.",
       content: "Working with John was a game-changer. His customer service background combined with technical automation skills delivered outstanding results.",
       rating: 5
+    },
+    {
+      id: 4,
+      name: "Flora McGrath",
+      position: "Client",
+      company: "",
+      content: "John was great to work with and consistently delivered reliable, high-quality work. He communicates clearly, understands requirements quickly, and handles automation tasks with attention to detail.",
+      rating: 5,
+      avatar: "/projects/thumbnail/MY%20PICTURE.jpg"
     }
   ]
 };
