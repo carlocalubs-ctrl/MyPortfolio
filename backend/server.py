@@ -28,42 +28,49 @@ async def contact(request: Request):
     try:
         data = await request.json()
 
-        params = {
-            "from": os.environ.get("SENDER_EMAIL"),
+        # Email notification sent to me
+        notification_params = {
+            "from": f"Portfolio Contact <{os.environ.get('SENDER_EMAIL')}>",
             "to": [os.environ.get("NOTIFICATION_EMAIL")],
+            "reply_to": data.get("email"),
             "subject": data.get("subject", "New Contact Submission"),
             "html": f"""
                 <h2>New Contact Submission</h2>
+
                 <p><strong>Name:</strong> {data.get('name')}</p>
                 <p><strong>Email:</strong> {data.get('email')}</p>
                 <p><strong>Subject:</strong> {data.get('subject')}</p>
-                <p><strong>Message:</strong> {data.get('message')}</p>
+                <p><strong>Message:</strong></p>
+                <p>{data.get('message')}</p>
             """
         }
 
-        # Send notification to you
-        resend.Emails.send(params)
+        resend.Emails.send(notification_params)
 
-        # Send confirmation to the client
+        # Confirmation email sent to the client
         confirmation_params = {
-            "from": os.environ.get("SENDER_EMAIL"),
+            "from": f"John Carlo R. Calubiran <{os.environ.get('SENDER_EMAIL')}>",
             "to": [data.get("email")],
-            "subject": "I've Received Your Inquiry",
+            "reply_to": os.environ.get("NOTIFICATION_EMAIL"),
+            "subject": f"Thank you for reaching out, {data.get('name')}",
             "html": f"""
-                <h2>Thank you for reaching out, {data.get('name')}.</h2>
+                <p>Hi {data.get('name')},</p>
 
-                <p>I've received your inquiry and appreciate you taking the time to get in touch.</p>
+                <p>
+                    Thank you for reaching out. I've received your message
+                    and appreciate you taking the time to get in touch.
+                </p>
 
-                <p>I'll review the details and get back to you as soon as possible, typically within 24 hours.</p>
+                <p>
+                    I'll review the details and get back to you as soon as
+                    possible, typically within 24 hours.
+                </p>
 
-                <p><strong>Your message:</strong></p>
-                <p>{data.get('message')}</p>
-
-                <br>
-
-                <p>Best regards,<br>
-                <strong>John Carlo R. Calubiran</strong><br>
-                Automation Specialist</p>
+                <p>
+                    Best regards,<br>
+                    <strong>John Carlo R. Calubiran</strong><br>
+                    HighLevel &amp; Automation Specialist
+                </p>
             """
         }
 
