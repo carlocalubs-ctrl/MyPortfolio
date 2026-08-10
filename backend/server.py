@@ -41,7 +41,33 @@ async def contact(request: Request):
             """
         }
 
+        # Send notification to you
         resend.Emails.send(params)
+
+        # Send confirmation to the client
+        confirmation_params = {
+            "from": os.environ.get("SENDER_EMAIL"),
+            "to": [data.get("email")],
+            "subject": "I've Received Your Inquiry",
+            "html": f"""
+                <h2>Thank you for reaching out, {data.get('name')}.</h2>
+
+                <p>I've received your inquiry and appreciate you taking the time to get in touch.</p>
+
+                <p>I'll review the details and get back to you as soon as possible, typically within 24 hours.</p>
+
+                <p><strong>Your message:</strong></p>
+                <p>{data.get('message')}</p>
+
+                <br>
+
+                <p>Best regards,<br>
+                <strong>John Carlo R. Calubiran</strong><br>
+                Automation Specialist</p>
+            """
+        }
+
+        resend.Emails.send(confirmation_params)
 
         return {
             "success": True,
