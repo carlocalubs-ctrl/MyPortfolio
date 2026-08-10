@@ -249,7 +249,7 @@ export const portfolioData = {
           title: "AI Voice Receptionist & GoHighLevel Automation",
           description: "AI-powered inbound call automation using Vapi, Twilio, n8n, APIs, and GoHighLevel to capture leads, manage callbacks, update CRM records, and support appointment workflows.",
           status: "Live",
-          image: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/n8n - GoHighLevel - Vapi_AI_Receptionist.png",
+          image: "/projects/n8n/AI%20Assistant%20-%20VAPI%20%2B%20Twilio%20%2B%20n8n%20%2B%20GHL/n8n%20-%20GoHighLevel%20-%20Vapi_AI_Receptionist.png",
           technologies: ["n8n", "Vapi AI", "GoHighLevel", "Twilio", "REST API", "Webhooks"],
           path: "/projects/n8n/ai-voice-receptionist",
           demoPath: "/projects/n8n/ai-voice-receptionist#demo",
