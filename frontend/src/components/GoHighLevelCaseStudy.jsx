@@ -81,7 +81,12 @@ const caseStudySections = [
     icon: Rows3,
     screenshots: [
       {
-        src: "/projects/Gohighlevel/Solar Demo/Pipeline/PIPELINE_.png",
+        src: "/projects/Gohighlevel/Solar Demo/Pipeline/ORIG PIPELINE.png",
+        label: "Solar Sales Pipeline",
+        alt: "Original GoHighLevel solar sales pipeline screenshot",
+      },
+      {
+        src: "/projects/Gohighlevel/Solar Demo/Pipeline/Pipeline1.png",
         label: "Solar Sales Pipeline",
         alt: "GoHighLevel solar sales pipeline screenshot",
       },
@@ -237,6 +242,7 @@ const ScreenshotGallery = ({ section, onOpen }) => {
   const current = screenshots[currentIndex];
   const hasMultiple = screenshots.length > 1;
   const isMarketingSection = section.id === "marketing";
+  const isPipelineSection = section.id === "pipeline";
   const isFullFunnelPreview = current.preview === "funnel-scroll";
 
   const move = (direction) => {
@@ -319,7 +325,11 @@ const ScreenshotGallery = ({ section, onOpen }) => {
             <img
               src={current.src}
               alt={current.alt}
-              className="max-h-[520px] w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
+              className={
+                isPipelineSection
+                  ? "block h-auto max-h-[520px] w-auto max-w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
+                  : "max-h-[520px] w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
+              }
               loading="lazy"
             />
           </div>

@@ -54,10 +54,10 @@ const ProjectThumbnail = ({ image, title, thumbnailStyle }) => {
           alt={title}
           className={
             isLogoThumbnail
-              ? "absolute left-1/2 top-1/2 h-auto w-full max-w-none -translate-x-1/2 -translate-y-1/2 object-contain object-center"
+              ? "absolute left-1/2 top-1/2 block h-auto w-full max-w-none -translate-x-1/2 -translate-y-1/2 object-contain object-center"
               : isCoverThumbnail
-                ? "h-full w-full object-cover object-center"
-                : "h-full w-full object-contain object-center"
+                ? "block h-full w-full object-cover object-center"
+                : "block h-full w-full object-contain object-center"
           }
           loading="lazy"
         />

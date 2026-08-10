@@ -598,10 +598,24 @@ video {
 }
 
 .project-funnel-scroll-preview {
-    height: 700px;
+    display: flex;
+    width: 100%;
+    height: auto;
+    max-height: 650px;
+    justify-content: center;
+    align-items: flex-start;
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-color: #14b8a6 #0f172a;
+}
+
+.project-funnel-scroll-preview img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    flex: 0 0 auto;
 }
 
 .project-screenshot-trigger,
@@ -637,13 +651,13 @@ video {
 
 @media (max-width: 1023px) {
     .project-funnel-scroll-preview {
-        height: 600px;
+        max-height: 520px;
     }
 }
 
 @media (max-width: 639px) {
     .project-funnel-scroll-preview {
-        height: 500px;
+        max-height: 420px;
     }
 }
 

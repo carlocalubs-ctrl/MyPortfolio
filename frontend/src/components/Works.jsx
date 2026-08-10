@@ -69,7 +69,7 @@ export const Works = () => {
                           <img
                             src={project.image}
                             alt={project.title}
-                            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                            className="block w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                             loading="lazy"
                           />
                         ) : (

@@ -166,7 +166,7 @@ export const portfolioData = {
       title: "n8n",
       description: "Advanced workflow automations connecting AI tools, APIs, CRMs, data sources, and publishing systems.",
       category: "n8n",
-      image: "/projects/thumbnail/THUMBNAIL n8n.png",
+      image: "/projects/thumbnail/THUMBNAIL%20n8n.png",
       technologies: ["n8n", "APIs", "AI Agents", "Integrations"],
       path: "/projects/n8n",
       status: "live"
@@ -176,7 +176,7 @@ export const portfolioData = {
       title: "Zapier",
       description: "Multi-step Zapier workflows for content processing, distribution, file monitoring, and social automation.",
       category: "Zapier",
-      image: "/projects/thumbnail/THUMBNAIL ZAPIER.png",
+      image: "/projects/thumbnail/THUMBNAIL%20ZAPIER.png",
       technologies: ["Zapier", "AI by Zapier", "Google Drive", "Social Media"],
       path: "/projects/zapier",
       status: "live"
@@ -186,7 +186,7 @@ export const portfolioData = {
       title: "Make",
       description: "Scenario-based automations for email, documents, reporting, task operations, and business process syncing.",
       category: "Make",
-      image: "/projects/thumbnail/THUMBNAIL MAKE.png",
+      image: "/projects/thumbnail/THUMBNAIL%20MAKE.png",
       technologies: ["Make.com", "Gmail", "Google Drive", "Google Sheets", "Xero"],
       path: "/projects/make",
       status: "live"
@@ -196,7 +196,7 @@ export const portfolioData = {
       title: "Funnels",
       description: "Conversion-focused funnel and landing page projects for lead capture and CRM-connected campaigns.",
       category: "Funnels",
-      image: "/projects/thumbnail/THUMBNAIL SALES FUNNEL.png",
+      image: "/projects/thumbnail/THUMBNAIL%20SALES%20FUNNEL.png",
       technologies: ["Landing Pages", "Lead Capture", "CRM Integration"],
       path: "/projects/funnels",
       status: "live"
@@ -249,7 +249,7 @@ export const portfolioData = {
           title: "AI Voice Receptionist & GoHighLevel Automation",
           description: "AI-powered inbound call automation using Vapi, Twilio, n8n, APIs, and GoHighLevel to capture leads, manage callbacks, update CRM records, and support appointment workflows.",
           status: "Live",
-          image: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/n8n - GoHighLevel - Vapi_AI_Receptionist.png",
+          image: "/projects/thumbnail/THUMBNAIL%20n8n.png",
           technologies: ["n8n", "Vapi AI", "GoHighLevel", "Twilio", "REST API", "Webhooks"],
           path: "/projects/n8n/ai-voice-receptionist",
           demoPath: "/projects/n8n/ai-voice-receptionist#demo",
