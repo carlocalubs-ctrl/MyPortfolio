@@ -160,14 +160,6 @@ export const Contact = () => {
 
         toast.success(response.data.message || 'Message sent successfully!');
 
-        setTimeout(() => {
-
-          setFormData({ name: '', email: '', subject: '', message: '' });
-
-          setIsSubmitted(false);
-
-        }, 3000);
-
       } else {
 
         toast.error('Unexpected response from server. Please try again.');
@@ -237,6 +229,16 @@ export const Contact = () => {
       setIsSubmitting(false);
 
     }
+
+  };
+
+
+
+  const handleSendAnotherMessage = () => {
+
+    setFormData({ name: '', email: '', subject: '', message: '' });
+
+    setIsSubmitted(false);
 
   };
 
@@ -560,15 +562,35 @@ export const Contact = () => {
 
                         <div className="py-12 text-center">
 
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/30 flex items-center justify-center mx-auto mb-5">
 
                             <CheckCircle2 className="w-8 h-8 text-teal-400" />
 
                           </div>
 
-                          <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
+                          <h3 className="text-2xl font-semibold text-white mb-3">Message Sent Successfully</h3>
 
-                          <p className="text-slate-400">Thank you for reaching out. I'll respond soon.</p>
+                          <div className="mx-auto max-w-xl space-y-3 text-slate-400 leading-relaxed">
+
+                            <p>Thank you for reaching out! Your message has been sent successfully.</p>
+
+                            <p>A confirmation email has been sent to your email address. If you don't see it in your inbox, please check your spam or junk folder.</p>
+
+                          </div>
+
+                          <Button
+
+                            type="button"
+
+                            onClick={handleSendAnotherMessage}
+
+                            className="mt-8 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium px-6"
+
+                          >
+
+                            Send Another Message
+
+                          </Button>
 
                         </div>
 
