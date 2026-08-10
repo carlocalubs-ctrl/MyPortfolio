@@ -39,7 +39,6 @@ export const Works = () => {
         <div className="max-w-7xl mx-auto space-y-20 sm:space-y-32">
           {projectCategories.map((project, index) => {
             const isReversed = index % 2 === 1;
-            const isGoHighLevelProject = project.id === 'gohighlevel';
 
             return (
               <ScrollReveal
@@ -65,16 +64,12 @@ export const Works = () => {
                     <div className="relative rounded-2xl overflow-hidden border border-slate-700/50 group-hover:border-teal-500/50 transition-all duration-500 bg-slate-900 shadow-2xl shadow-black/40 z-10">
                       <div className="absolute -inset-1 bg-gradient-to-r from-teal-500/0 via-emerald-500/30 to-cyan-500/0 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"></div>
 
-                      <div className="relative aspect-[16/10] overflow-hidden">
+                      <div className="relative aspect-video w-full overflow-hidden">
                         {project.image ? (
                           <img
                             src={project.image}
                             alt={project.title}
-                            className={`w-full h-full object-center transition-transform duration-700 ${
-                              isGoHighLevelProject
-                                ? 'object-contain'
-                                : 'object-cover group-hover:scale-105'
-                            }`}
+                            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                             loading="lazy"
                           />
                         ) : (
@@ -91,11 +86,15 @@ export const Works = () => {
                           </div>
                         )}
 
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-white text-sm font-medium bg-teal-500/90 backdrop-blur px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                        <Link
+                          to={project.path}
+                          onClick={(event) => event.stopPropagation()}
+                          className="pointer-events-auto absolute bottom-2 left-1/2 z-20 flex w-fit max-w-[calc(100%-32px)] -translate-x-1/2 translate-y-2 cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-full bg-teal-500/90 px-3 py-1.5 text-xs font-medium text-white opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:bottom-3 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm lg:bottom-4"
+                        >
                           <ArrowUpRight className="w-4 h-4" /> View Projects
-                        </div>
+                        </Link>
 
                         <div className="absolute top-4 left-4 flex flex-col gap-2">
                           <Badge className="bg-slate-900/80 backdrop-blur text-teal-300 border border-teal-500/30 px-3 py-1">

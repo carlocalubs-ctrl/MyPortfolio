@@ -44,6 +44,7 @@ export const ProjectTags = ({ tags }) => {
 
 const ProjectThumbnail = ({ image, title, thumbnailStyle }) => {
   const isLogoThumbnail = thumbnailStyle === "logo";
+  const isCoverThumbnail = thumbnailStyle === "cover";
 
   return (
     <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-slate-900">
@@ -54,7 +55,9 @@ const ProjectThumbnail = ({ image, title, thumbnailStyle }) => {
           className={
             isLogoThumbnail
               ? "absolute left-1/2 top-1/2 h-auto w-full max-w-none -translate-x-1/2 -translate-y-1/2 object-contain object-center"
-              : "h-full w-full object-contain object-center"
+              : isCoverThumbnail
+                ? "h-full w-full object-cover object-center"
+                : "h-full w-full object-contain object-center"
           }
           loading="lazy"
         />

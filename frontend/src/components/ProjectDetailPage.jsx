@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ChevronLeft, ChevronRight, ExternalLink, GalleryHorizontal, PlayCircle, X } from "lucide-react";
@@ -47,6 +47,80 @@ const ProjectScreenshot = ({ screenshot, index, onOpen }) => (
     </div>
   </button>
 );
+
+const FunnelScreenshotGallery = ({ screenshots }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const previewRef = useRef(null);
+  const current = screenshots[currentIndex];
+
+  const move = (direction) => {
+    setCurrentIndex((index) => (index + direction + screenshots.length) % screenshots.length);
+    requestAnimationFrame(() => {
+      if (previewRef.current) {
+        previewRef.current.scrollTop = 0;
+      }
+    });
+  };
+
+  return (
+    <Card className="border-slate-700 bg-slate-800/50 backdrop-blur-sm">
+      <CardHeader>
+        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20">
+          <GalleryHorizontal className="h-7 w-7 text-teal-400" />
+        </div>
+        <CardTitle className="text-2xl text-white">
+          Funnel Gallery
+        </CardTitle>
+        <CardDescription className="text-base leading-relaxed text-slate-400">
+          Long-form GoHighLevel funnel screenshots with internal preview scrolling.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-5">
+        <div
+          ref={previewRef}
+          className="project-funnel-scroll-preview rounded-lg border border-slate-700 bg-slate-900/70"
+        >
+          <img
+            src={current.src}
+            alt={current.alt}
+            className="block h-auto w-full"
+            loading="lazy"
+          />
+        </div>
+
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="text-sm font-semibold text-white">{current.label}</div>
+            <div className="text-xs text-slate-400">
+              {currentIndex + 1} / {screenshots.length}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => move(-1)}
+              className="h-10 border-slate-700 px-3 text-slate-300 hover:bg-slate-800 hover:text-white"
+              aria-label="Previous funnel screenshot"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => move(1)}
+              className="h-10 border-slate-700 px-3 text-slate-300 hover:bg-slate-800 hover:text-white"
+              aria-label="Next funnel screenshot"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 export const ProjectDetailPage = () => {
   const { categoryId, projectSlug } = useParams();
@@ -102,6 +176,7 @@ export const ProjectDetailPage = () => {
   const fallbackSections = screenshots.length === 0 && !project.demoVideo
     ? detailSections[categoryId]
     : null;
+  const isFunnelProject = categoryId === "funnels" && screenshots.length > 0;
 
   return (
     <div className="min-h-screen relative" style={{ background: "#0f172a" }}>
@@ -186,7 +261,13 @@ export const ProjectDetailPage = () => {
                   </ScrollReveal>
                 ))}
 
-                {screenshots.length > 0 && (
+                {isFunnelProject && (
+                  <ScrollReveal>
+                    <FunnelScreenshotGallery screenshots={screenshots} />
+                  </ScrollReveal>
+                )}
+
+                {!isFunnelProject && screenshots.length > 0 && (
                   <ScrollReveal>
                     <Card className="border-slate-700 bg-slate-800/50 backdrop-blur-sm">
                       <CardHeader>

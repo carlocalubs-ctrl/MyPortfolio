@@ -21,7 +21,21 @@ const HashScroll = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!location.hash) return;
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    if (!location.hash) {
+      const animationFrame = window.requestAnimationFrame(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "instant",
+        });
+      });
+
+      return () => window.cancelAnimationFrame(animationFrame);
+    }
 
     const id = location.hash.slice(1);
     const timeout = window.setTimeout(() => {

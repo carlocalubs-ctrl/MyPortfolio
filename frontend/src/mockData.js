@@ -166,19 +166,9 @@ export const portfolioData = {
       title: "n8n",
       description: "Advanced workflow automations connecting AI tools, APIs, CRMs, data sources, and publishing systems.",
       category: "n8n",
-      image: null,
+      image: "/projects/thumbnail/THUMBNAIL n8n.png",
       technologies: ["n8n", "APIs", "AI Agents", "Integrations"],
       path: "/projects/n8n",
-      status: "live"
-    },
-    {
-      id: "make",
-      title: "Make",
-      description: "Scenario-based automations for email, documents, reporting, task operations, and business process syncing.",
-      category: "Make",
-      image: null,
-      technologies: ["Make.com", "Gmail", "Google Drive", "Google Sheets", "Xero"],
-      path: "/projects/make",
       status: "live"
     },
     {
@@ -186,9 +176,19 @@ export const portfolioData = {
       title: "Zapier",
       description: "Multi-step Zapier workflows for content processing, distribution, file monitoring, and social automation.",
       category: "Zapier",
-      image: null,
+      image: "/projects/thumbnail/THUMBNAIL ZAPIER.png",
       technologies: ["Zapier", "AI by Zapier", "Google Drive", "Social Media"],
       path: "/projects/zapier",
+      status: "live"
+    },
+    {
+      id: "make",
+      title: "Make",
+      description: "Scenario-based automations for email, documents, reporting, task operations, and business process syncing.",
+      category: "Make",
+      image: "/projects/thumbnail/THUMBNAIL MAKE.png",
+      technologies: ["Make.com", "Gmail", "Google Drive", "Google Sheets", "Xero"],
+      path: "/projects/make",
       status: "live"
     },
     {
@@ -196,7 +196,7 @@ export const portfolioData = {
       title: "Funnels",
       description: "Conversion-focused funnel and landing page projects for lead capture and CRM-connected campaigns.",
       category: "Funnels",
-      image: null,
+      image: "/projects/thumbnail/THUMBNAIL SALES FUNNEL.png",
       technologies: ["Landing Pages", "Lead Capture", "CRM Integration"],
       path: "/projects/funnels",
       status: "live"
@@ -408,12 +408,30 @@ export const portfolioData = {
           title: "Solar Lead Generation Funnel",
           description: "Conversion-focused landing page and funnel designed for solar lead capture and CRM integration.",
           status: "Live",
-          image: null,
+          image: "/projects/funnel/solardemo/Thumbnail.png",
+          thumbnailStyle: "cover",
           technologies: ["Funnels", "Landing Pages", "Lead Capture", "CRM Integration"],
           path: "/projects/funnels/solar-lead-generation",
           demoUrl: "",
           platform: "GoHighLevel",
-          liveLink: null
+          liveLink: null,
+          screenshots: [
+            {
+              src: "/projects/Gohighlevel/Solar Demo/Funnel/Funnel.png",
+              label: "Full Funnel",
+              alt: "Solar lead generation full funnel screenshot"
+            },
+            {
+              src: "/projects/Gohighlevel/Solar Demo/Funnel/Funnel_Form.png",
+              label: "Funnel Form",
+              alt: "Solar lead generation funnel form screenshot"
+            },
+            {
+              src: "/projects/Gohighlevel/Solar Demo/Funnel/Funnel_Thank you page.png",
+              label: "Thank You Page",
+              alt: "Solar lead generation funnel thank you page screenshot"
+            }
+          ]
         },
         {
           id: "02",
