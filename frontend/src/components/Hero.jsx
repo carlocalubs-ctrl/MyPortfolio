@@ -65,14 +65,16 @@ export const Hero = () => {
                   Let's Work Together
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => scrollToSection('works')}
-                  className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white px-8 py-6 text-lg"
-                >
-                  View My Work
-                </Button>
+                <span className="cta-attention-wrapper">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => scrollToSection('works')}
+                    className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white px-8 py-6 text-lg"
+                  >
+                    View My Work
+                  </Button>
+                </span>
               </div>
 
               {/* Stats */}

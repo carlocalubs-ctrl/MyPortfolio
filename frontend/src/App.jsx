@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
+import { ToolsPlatforms } from "@/components/ToolsPlatforms";
 import { Experience } from "@/components/Experience";
 import { Works } from "@/components/Works";
 import { Testimonials } from "@/components/Testimonials";
@@ -13,6 +14,8 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { Toaster } from "@/components/ui/sonner";
 import { GoHighLevelCaseStudy } from "@/components/GoHighLevelCaseStudy";
+import { CategoryProjectsPage } from "@/components/CategoryProjectsPage";
+import { ProjectDetailPage } from "@/components/ProjectDetailPage";
 
 const HashScroll = () => {
   const location = useLocation();
@@ -40,8 +43,9 @@ const Home = () => {
         <main>
           <Hero />
           <Services />
-          <Experience />
+          <ToolsPlatforms />
           <Works />
+          <Experience />
           <Testimonials />
           <Contact />
         </main>
@@ -60,6 +64,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects/gohighlevel-crm-marketing-automation" element={<GoHighLevelCaseStudy />} />
+          <Route path="/projects/:categoryId/:projectSlug" element={<ProjectDetailPage />} />
+          <Route path="/projects/:categoryId" element={<CategoryProjectsPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster position="top-right" />

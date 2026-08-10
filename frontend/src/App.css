@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    cursor: none;
+    cursor: auto;
 }
 
 /* Restore default cursor on mobile */
@@ -117,6 +117,50 @@ body {
     animation: pulseGlow 3s ease-in-out infinite;
 }
 
+@keyframes ctaAttentionPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(20, 184, 166, 0));
+    }
+
+    8% {
+        transform: scale(1.10);
+        filter: drop-shadow(0 0 14px rgba(20, 184, 166, 0.65));
+    }
+
+    16% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(20, 184, 166, 0));
+    }
+
+    24% {
+        transform: scale(1.07);
+        filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.50));
+    }
+
+    32%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(20, 184, 166, 0));
+    }
+}
+
+.cta-attention-wrapper {
+    display: inline-block !important;
+    animation: ctaDebugMovement 1s ease-in-out infinite !important;
+    transform-origin: center;
+    will-change: transform, filter;
+}
+
+@keyframes ctaDebugMovement {
+    0%, 100% {
+        transform: translateX(0) scale(1);
+    }
+
+    50% {
+        transform: translateX(15px) scale(1.12);
+    }
+}
+
 /* Scale up animation on load */
 @keyframes scaleIn {
     0% {
@@ -163,9 +207,172 @@ body {
     z-index: -1;
 }
 
-/* Hide cursor on interactive elements - we have custom one */
+/* Keep the native system cursor visible while the custom cursor remains decorative. */
 a, button, input, textarea, select {
-    cursor: none;
+    cursor: pointer;
+}
+
+input, textarea, select {
+    cursor: auto;
+}
+
+video {
+    cursor: auto;
+}
+
+.tools-marquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.tools-marquee-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tools-marquee-track {
+    display: flex;
+    width: max-content;
+    flex-wrap: nowrap;
+    animation-timing-function: linear !important;
+    animation-iteration-count: infinite !important;
+    animation-play-state: running !important;
+    will-change: transform;
+}
+
+.tools-marquee-left {
+    animation-name: toolsMarqueeLeft !important;
+    animation-duration: 32s !important;
+}
+
+.tools-marquee-right {
+    animation-name: toolsMarqueeRight !important;
+    animation-duration: 36s !important;
+}
+
+.tools-marquee-set {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    gap: 16px;
+    padding-right: 16px;
+}
+
+@keyframes toolsMarqueeLeft {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes toolsMarqueeRight {
+    0% {
+        transform: translate3d(-50%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.tool-platform-card {
+    display: flex;
+    min-width: 12rem;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid rgba(20, 184, 166, 0.22);
+    border-radius: 0.5rem;
+    background: rgba(30, 41, 59, 0.5);
+    padding: 0.85rem 1rem;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.22);
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.tool-platform-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(45, 212, 191, 0.58);
+    background: rgba(30, 41, 59, 0.72);
+    box-shadow: 0 0 22px rgba(20, 184, 166, 0.16), 0 14px 34px rgba(15, 23, 42, 0.3);
+}
+
+.tool-platform-mark {
+    display: flex;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+    max-width: 7.5rem;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(45, 212, 191, 0.24);
+    border-radius: 0.5rem;
+    background: rgba(15, 23, 42, 0.82);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tool-platform-logo {
+    display: block;
+    height: 36px;
+    width: auto;
+    max-width: 90px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.tool-platform-card:hover .tool-platform-logo {
+    transform: scale(1.04);
+    filter: brightness(1.08);
+}
+
+.tool-platform-card:hover .tool-platform-mark {
+    border-color: rgba(45, 212, 191, 0.6);
+    box-shadow: 0 0 18px rgba(20, 184, 166, 0.18);
+}
+
+.tool-platform-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 5rem;
+    pointer-events: none;
+}
+
+.tool-platform-fade-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(2, 6, 23, 0.96), transparent);
+}
+
+.tool-platform-fade-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(2, 6, 23, 0.96), transparent);
+}
+
+@media (max-width: 639px) {
+    .tools-marquee-track {
+        padding-bottom: 0.25rem;
+    }
+
+    .tool-platform-card {
+        min-width: 10.5rem;
+        padding: 0.75rem 0.85rem;
+    }
+
+    .tool-platform-logo {
+        height: 30px;
+        max-width: 96px;
+    }
+
+    .tool-platform-fade {
+        display: none;
+    }
 }
 
 /* Custom scrollbar */
@@ -194,16 +401,107 @@ a, button, input, textarea, select {
 
 /* Project overview flow */
 .project-overview-flow {
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: center;
+    gap: 0;
+    padding: 1.5rem 0.5rem 0.75rem;
 }
 
 .project-overview-step {
+    position: relative;
+    display: flex;
+    align-items: center;
     min-width: 0;
 }
 
-.project-overview-step-card {
-    width: 100%;
-    min-height: 132px;
+.project-overview-step-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-width: 5.75rem;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.project-overview-number {
+    margin-bottom: 0.45rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(94, 234, 212, 0.72);
+}
+
+.project-overview-icon {
+    display: flex;
+    height: 2.9rem;
+    width: 2.9rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(20, 184, 166, 0.28);
+    border-radius: 9999px;
+    background: rgba(15, 23, 42, 0.78);
+    color: #2dd4bf;
+    box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.08), 0 12px 30px rgba(15, 23, 42, 0.35);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.project-overview-title {
+    margin-top: 0.85rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #e2e8f0;
+    transition: color 0.25s ease;
+}
+
+.project-overview-connector {
+    display: flex;
+    flex: 0 1 4rem;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    color: rgba(45, 212, 191, 0.72);
+}
+
+.project-overview-connector span {
+    height: 1px;
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    background: linear-gradient(to right, rgba(20, 184, 166, 0.2), rgba(45, 212, 191, 0.75));
+}
+
+.project-overview-arrow {
+    height: 1rem;
+    width: 1rem;
+    flex: 0 0 auto;
+}
+
+.project-overview-step:hover .project-overview-step-body {
+    transform: translateY(-2px);
+}
+
+.project-overview-step:hover .project-overview-icon {
+    border-color: rgba(45, 212, 191, 0.7);
+    background: rgba(20, 184, 166, 0.12);
+    box-shadow: 0 0 22px rgba(20, 184, 166, 0.28), 0 14px 34px rgba(15, 23, 42, 0.42);
+    color: #5eead4;
+}
+
+.project-overview-step:hover .project-overview-title,
+.project-overview-step-final .project-overview-title {
+    color: #ffffff;
+}
+
+.project-overview-step-final .project-overview-icon {
+    border-color: rgba(16, 185, 129, 0.62);
+    background: rgba(16, 185, 129, 0.14);
+    box-shadow: 0 0 26px rgba(16, 185, 129, 0.24), 0 14px 34px rgba(15, 23, 42, 0.42);
+    color: #6ee7b7;
 }
 
 @media (max-width: 1023px) {
@@ -216,16 +514,22 @@ a, button, input, textarea, select {
         padding-right: 1.25rem;
     }
 
-    .project-overview-step {
-        align-items: stretch;
+    .project-overview-flow {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 2.5rem;
     }
 
-    .project-overview-step-card {
-        min-height: 116px;
+    .project-overview-step:nth-child(3) .project-overview-connector,
+    .project-overview-step:nth-child(6) .project-overview-connector {
+        display: none;
+    }
+
+    .project-overview-step-body {
+        min-width: 5.5rem;
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
     .project-overview-card {
         border-radius: 0.75rem;
     }
@@ -241,21 +545,105 @@ a, button, input, textarea, select {
     }
 
     .project-overview-flow {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem 0 0;
     }
 
-    .project-overview-step-card {
+    .project-overview-step {
         display: flex;
-        min-height: 0;
-        align-items: center;
-        gap: 0.875rem;
-        padding: 0.875rem;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .project-overview-step-body {
+        min-width: 0;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.9rem;
         text-align: left;
     }
 
     .project-overview-number {
         margin: 0;
-        flex: 0 0 auto;
+        width: 2rem;
+        text-align: right;
+    }
+
+    .project-overview-title {
+        margin-top: 0;
+    }
+
+    .project-overview-connector {
+        flex-direction: column;
+        align-items: center;
+        align-self: flex-start;
+        min-width: 0;
+        height: 2.25rem;
+        margin-left: 3.45rem;
+        color: rgba(45, 212, 191, 0.72);
+    }
+
+    .project-overview-connector span {
+        width: 1px;
+        min-width: 0;
+        min-height: 1.35rem;
+        background: linear-gradient(to bottom, rgba(20, 184, 166, 0.2), rgba(45, 212, 191, 0.75));
+    }
+
+    .project-overview-arrow {
+        transform: rotate(90deg);
+    }
+}
+
+.project-funnel-scroll-preview {
+    height: 700px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: #14b8a6 #0f172a;
+}
+
+.project-screenshot-trigger,
+.project-screenshot-trigger * {
+    cursor: zoom-in !important;
+}
+
+.project-page,
+.project-page video,
+.project-page img,
+.project-lightbox-overlay,
+.project-lightbox-overlay * {
+    cursor: auto;
+}
+
+.project-lightbox-overlay {
+    cursor: zoom-out !important;
+}
+
+.project-lightbox-overlay .custom-cursor,
+.project-lightbox-overlay .custom-cursor-dot {
+    display: none !important;
+}
+
+.project-lightbox-control,
+.project-lightbox-control * {
+    cursor: pointer !important;
+}
+
+.project-lightbox-image {
+    cursor: zoom-out !important;
+}
+
+@media (max-width: 1023px) {
+    .project-funnel-scroll-preview {
+        height: 600px;
+    }
+}
+
+@media (max-width: 639px) {
+    .project-funnel-scroll-preview {
+        height: 500px;
     }
 }
 

@@ -22,27 +22,6 @@ export const portfolioData = {
   // Services
   services: [
     {
-      id: 1,
-      title: "Customer Service",
-      description: "Comprehensive customer support across multiple channels including email, chat, and phone. Delivering exceptional service experiences with proven track record.",
-      features: ["Email Support", "Live Chat", "Phone Support", "Ticket Management"],
-      icon: "headset"
-    },
-    {
-      id: 2,
-      title: "AI Automation",
-      description: "Leverage cutting-edge AI automation tools to streamline workflows, reduce manual tasks, and boost operational efficiency.",
-      features: ["Workflow Automation", "Process Optimization", "Task Automation", "Smart Solutions"],
-      icon: "bot"
-    },
-    {
-      id: 3,
-      title: "API Integration",
-      description: "Seamless integration of third-party APIs to connect your systems, automate data flow, and enhance functionality.",
-      features: ["REST API", "Webhooks", "Data Sync", "System Integration"],
-      icon: "plug"
-    },
-    {
       id: 4,
       title: "GoHighLevel",
       description: "Complete CRM, sales, marketing, and automation systems built around your business process.",
@@ -59,12 +38,52 @@ export const portfolioData = {
       icon: "workflow"
     },
     {
+      id: 2,
+      title: "AI Automation",
+      description: "Leverage cutting-edge AI automation tools to streamline workflows, reduce manual tasks, and boost operational efficiency.",
+      features: ["Workflow Automation", "Process Optimization", "Task Automation", "Smart Solutions"],
+      icon: "bot"
+    },
+    {
+      id: 3,
+      title: "API Integration",
+      description: "Seamless integration of third-party APIs to connect your systems, automate data flow, and enhance functionality.",
+      features: ["REST API", "Webhooks", "Data Sync", "System Integration"],
+      icon: "plug"
+    },
+    {
       id: 5,
       title: "CRM Integration",
       description: "Connect and optimize your CRM systems for better customer relationships, data management, and business insights.",
       features: ["CRM Setup", "Data Migration", "Custom Workflows", "Analytics"],
       icon: "database"
+    },
+    {
+      id: 1,
+      title: "Customer Service",
+      description: "Comprehensive customer support across multiple channels including email, chat, and phone. Delivering exceptional service experiences with proven track record.",
+      features: ["Email Support", "Live Chat", "Phone Support", "Ticket Management"],
+      icon: "headset"
     }
+  ],
+
+  toolsPlatforms: [
+    { name: "GoHighLevel", logo: null, icon: "workflow" },
+    { name: "n8n", logo: null, icon: "nodes" },
+    { name: "Make", logo: null, icon: "blocks" },
+    { name: "Zapier", logo: null, icon: "zap" },
+    { name: "Vapi AI", logo: null, icon: "phone" },
+    { name: "Twilio", logo: null, icon: "message" },
+    { name: "ChatGPT", logo: null, icon: "bot" },
+    { name: "Claude", logo: null, icon: "sparkles" },
+    { name: "Gemini", logo: null, icon: "stars" },
+    { name: "Airtable", logo: null, icon: "database" },
+    { name: "Asana", logo: null, icon: "check" },
+    { name: "Xero", logo: null, icon: "calculator" },
+    { name: "Salesforce", logo: null, icon: "cloud" },
+    { name: "Google Workspace", logo: null, icon: "briefcase" },
+    { name: "Canva", logo: null, icon: "palette" },
+    { name: "Systeme.io", logo: null, icon: "globe" }
   ],
 
   // Work Experience
@@ -130,6 +149,294 @@ export const portfolioData = {
     { name: "CRM Systems", level: 85, category: "Technical" }
   ],
 
+  // Featured Project Categories
+  projectCategories: [
+    {
+      id: "gohighlevel",
+      title: "GoHighLevel",
+      description: "CRM, funnels, pipelines, workflows, calendars, and marketing automation projects built in GoHighLevel.",
+      category: "GoHighLevel",
+      image: "/gohighlevel-thumbnail.png",
+      technologies: ["CRM", "Funnels", "Pipelines", "Workflows", "Calendars", "Marketing Automation"],
+      path: "/projects/gohighlevel",
+      status: "live"
+    },
+    {
+      id: "n8n",
+      title: "n8n",
+      description: "Advanced workflow automations connecting AI tools, APIs, CRMs, data sources, and publishing systems.",
+      category: "n8n",
+      image: null,
+      technologies: ["n8n", "APIs", "AI Agents", "Integrations"],
+      path: "/projects/n8n",
+      status: "live"
+    },
+    {
+      id: "make",
+      title: "Make",
+      description: "Scenario-based automations for email, documents, reporting, task operations, and business process syncing.",
+      category: "Make",
+      image: null,
+      technologies: ["Make.com", "Gmail", "Google Drive", "Google Sheets", "Xero"],
+      path: "/projects/make",
+      status: "live"
+    },
+    {
+      id: "zapier",
+      title: "Zapier",
+      description: "Multi-step Zapier workflows for content processing, distribution, file monitoring, and social automation.",
+      category: "Zapier",
+      image: null,
+      technologies: ["Zapier", "AI by Zapier", "Google Drive", "Social Media"],
+      path: "/projects/zapier",
+      status: "live"
+    },
+    {
+      id: "funnels",
+      title: "Funnels",
+      description: "Conversion-focused funnel and landing page projects for lead capture and CRM-connected campaigns.",
+      category: "Funnels",
+      image: null,
+      technologies: ["Landing Pages", "Lead Capture", "CRM Integration"],
+      path: "/projects/funnels",
+      status: "live"
+    }
+  ],
+
+  platformProjects: {
+    gohighlevel: {
+      title: "GoHighLevel Projects",
+      subtitle: "CRM • Funnels • Pipelines • Workflows • Calendars • Marketing Automation",
+      projects: [
+        {
+          id: "01",
+          title: "Solar CRM & Automation System",
+          description: "End-to-end GoHighLevel CRM and automation system for managing solar leads, appointments, sales pipelines, follow-ups, and marketing workflows.",
+          status: "Live",
+          image: "/projects/Gohighlevel/Solar Demo/Logo/Solar Demo (1).png",
+          thumbnailStyle: "logo",
+          technologies: ["GoHighLevel", "CRM", "Funnels", "Pipelines", "Workflows", "Calendars", "Marketing Automation"],
+          path: "/projects/gohighlevel-crm-marketing-automation",
+          demoPath: "/projects/gohighlevel-crm-marketing-automation#demo",
+          demoUrl: ""
+        },
+        {
+          id: "02",
+          title: "Coming Soon",
+          description: "More GoHighLevel projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        },
+        {
+          id: "03",
+          title: "Coming Soon",
+          description: "More GoHighLevel projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        }
+      ]
+    },
+    n8n: {
+      title: "n8n Projects",
+      subtitle: "AI Agents • APIs • Workflow Automation • CRM Integrations",
+      projects: [
+        {
+          id: "01",
+          title: "AI Voice Receptionist & GoHighLevel Automation",
+          description: "AI-powered inbound call automation using Vapi, Twilio, n8n, APIs, and GoHighLevel to capture leads, manage callbacks, update CRM records, and support appointment workflows.",
+          status: "Live",
+          image: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/n8n - GoHighLevel - Vapi_AI_Receptionist.png",
+          technologies: ["n8n", "Vapi AI", "GoHighLevel", "Twilio", "REST API", "Webhooks"],
+          path: "/projects/n8n/ai-voice-receptionist",
+          demoPath: "/projects/n8n/ai-voice-receptionist#demo",
+          screenshots: [
+            {
+              src: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/n8n - GoHighLevel - Vapi_AI_Receptionist.png",
+              label: "n8n Workflow Screenshot",
+              alt: "n8n GoHighLevel Vapi AI receptionist workflow screenshot"
+            },
+            {
+              src: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/VAPI SCREENSHOT.png",
+              label: "Vapi Screenshot",
+              alt: "Vapi AI receptionist configuration screenshot"
+            }
+          ],
+          demoVideo: {
+            src: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/Live Phone Call Demo - Calling Twilio Number GHL n8n Vapi.mp4",
+            type: "video/mp4"
+          }
+        },
+        {
+          id: "02",
+          title: "Weather-to-Social Media Automation",
+          description: "Automated workflow that retrieves weather data, generates AI-powered content, creates visual assets, publishes to social platforms, and stores outputs in Google Drive.",
+          status: "Live",
+          image: "/projects/n8n/Auto Post Weather Status to SocMed and save to Gdrive/Auto Post Weather Status.jpg",
+          technologies: ["n8n", "Weather API", "Gemini AI", "Google Drive", "Social Media APIs"],
+          path: "/projects/n8n/weather-social",
+          screenshots: [
+            {
+              src: "/projects/n8n/Auto Post Weather Status to SocMed and save to Gdrive/Auto Post Weather Status.jpg",
+              label: "Weather Automation Workflow",
+              alt: "n8n weather to social media automation workflow screenshot"
+            }
+          ]
+        },
+        {
+          id: "03",
+          title: "Coming Soon",
+          description: "More n8n projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        }
+      ]
+    },
+    make: {
+      title: "Make Projects",
+      subtitle: "Email • Documents • Reporting • Task and Invoice Automation",
+      projects: [
+        {
+          id: "01",
+          title: "Automated Gmail Sorting & Email Management",
+          description: "Make.com automation for monitoring Gmail, organizing incoming messages, processing email data, and reducing repetitive inbox management.",
+          status: "Live",
+          image: "/projects/make/AUTO SORT GMAIL/AUTO SORT GMAIL_SS.jpg",
+          technologies: ["Make", "Gmail", "Automation", "Email Management"],
+          path: "/projects/make/gmail-processing",
+          demoPath: "/projects/make/gmail-processing#demo",
+          screenshots: [
+            {
+              src: "/projects/make/AUTO SORT GMAIL/AUTO SORT GMAIL_SS.jpg",
+              label: "Gmail Sorting Workflow",
+              alt: "Make automated Gmail sorting workflow screenshot"
+            }
+          ],
+          demoVideo: {
+            src: "/projects/make/AUTO SORT GMAIL/AUTO SORT GMAIL_LOOM.mp4",
+            type: "video/mp4"
+          }
+        },
+        {
+          id: "02",
+          title: "Xero to Asana Transaction Automation",
+          description: "Automated workflow connecting Xero and Asana to process transaction data, organize project information, and reduce manual reporting work.",
+          status: "Live",
+          image: "/projects/make/XERO (Bank transaction into csv & upload to ASANA)/1. PROJECT SCREENSHOT.jpg",
+          technologies: ["Make", "Xero", "Asana", "Automation", "Data Sync"],
+          path: "/projects/make/xero-asana",
+          screenshots: [
+            {
+              src: "/projects/make/XERO (Bank transaction into csv & upload to ASANA)/1. PROJECT SCREENSHOT.jpg",
+              label: "Project Workflow Screenshot",
+              alt: "Make Xero to Asana transaction automation workflow screenshot"
+            },
+            {
+              src: "/projects/make/XERO (Bank transaction into csv & upload to ASANA)/2. ASANA Screenshot (Completed task with uploaded attachment).jpg",
+              label: "Asana Result Screenshot",
+              alt: "Asana completed task with uploaded attachment screenshot"
+            }
+          ]
+        },
+        {
+          id: "03",
+          title: "Coming Soon",
+          description: "More Make projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        }
+      ]
+    },
+    zapier: {
+      title: "Zapier Projects",
+      subtitle: "Content Processing • Distribution • AI Automation",
+      projects: [
+        {
+          id: "01",
+          title: "Automated Content Repurposing & Distribution",
+          description: "Multi-step Zapier automation that processes content, repurposes it with AI, and distributes formatted outputs across social platforms.",
+          status: "Live",
+          image: "/projects/zapier/Content Repurposing/Content_Repurposing_SS.jpg",
+          technologies: ["Zapier", "AI Automation", "Content Repurposing", "Google Drive", "Social Media"],
+          path: "/projects/zapier/content-distribution",
+          demoPath: "/projects/zapier/content-distribution#demo",
+          screenshots: [
+            {
+              src: "/projects/zapier/Content Repurposing/Content_Repurposing_SS.jpg",
+              label: "Content Repurposing Workflow",
+              alt: "Zapier content repurposing and distribution workflow screenshot"
+            }
+          ],
+          demoVideo: {
+            src: "/projects/zapier/Content Repurposing/Content_Repurposing_LOOM.mp4",
+            type: "video/mp4"
+          }
+        },
+        {
+          id: "02",
+          title: "Coming Soon",
+          description: "More Zapier projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        },
+        {
+          id: "03",
+          title: "Coming Soon",
+          description: "More Zapier projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        }
+      ]
+    },
+    funnels: {
+      title: "Funnels Projects",
+      subtitle: "Landing Pages • Lead Capture • Desktop and Mobile Screenshots",
+      projects: [
+        {
+          id: "01",
+          title: "Solar Lead Generation Funnel",
+          description: "Conversion-focused landing page and funnel designed for solar lead capture and CRM integration.",
+          status: "Live",
+          image: null,
+          technologies: ["Funnels", "Landing Pages", "Lead Capture", "CRM Integration"],
+          path: "/projects/funnels/solar-lead-generation",
+          demoUrl: "",
+          platform: "GoHighLevel",
+          liveLink: null
+        },
+        {
+          id: "02",
+          title: "Coming Soon",
+          description: "More funnel projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        },
+        {
+          id: "03",
+          title: "Coming Soon",
+          description: "More funnel projects will be added soon.",
+          status: "Coming Soon",
+          image: null,
+          technologies: [],
+          path: null
+        }
+      ]
+    }
+  },
+
   // Previous Works / Projects
   projects: [
     {
@@ -141,7 +448,7 @@ export const portfolioData = {
       image: "/gohighlevel-thumbnail.png",
       video: null,
       demoUrl: null,
-      caseStudyPath: "/projects/gohighlevel-crm-marketing-automation",
+      caseStudyPath: "/projects/gohighlevel",
       status: "live"
     },
     {

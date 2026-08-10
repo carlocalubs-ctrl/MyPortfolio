@@ -25,8 +25,8 @@ export const Header = () => {
   const navItems = [
     { label: "Home", id: "hero" },
     { label: "Services", id: "services" },
-    { label: "Experience", id: "experience" },
     { label: "Works", id: "works" },
+    { label: "Experience", id: "experience" },
     { label: "Testimonials", id: "testimonials" },
     { label: "Contact", id: "contact" },
   ];
@@ -60,12 +60,14 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button
-              onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium"
-            >
-              Get In Touch
-            </Button>
+            <span className="cta-attention-wrapper">
+              <Button
+                onClick={() => scrollToSection("contact")}
+                className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-medium"
+              >
+                Get In Touch
+              </Button>
+            </span>
           </div>
 
           {/* Mobile Menu Button */}
