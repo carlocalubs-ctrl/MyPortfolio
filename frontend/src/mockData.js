@@ -249,24 +249,24 @@ export const portfolioData = {
           title: "AI Voice Receptionist & GoHighLevel Automation",
           description: "AI-powered inbound call automation using Vapi, Twilio, n8n, APIs, and GoHighLevel to capture leads, manage callbacks, update CRM records, and support appointment workflows.",
           status: "Live",
-          image: "/projects/n8n/AI%20Assistant%20-%20VAPI%20%2B%20Twilio%20%2B%20n8n%20%2B%20GHL/n8n%20-%20GoHighLevel%20-%20Vapi_AI_Receptionist.png",
+          image: "/projects/n8n/AI%20Assistant%20-%20VAPI%20+%20Twilio%20+%20n8n%20+%20GHL/n8n%20-%20GoHighLevel%20-%20Vapi_AI_Receptionist.png",
           technologies: ["n8n", "Vapi AI", "GoHighLevel", "Twilio", "REST API", "Webhooks"],
           path: "/projects/n8n/ai-voice-receptionist",
           demoPath: "/projects/n8n/ai-voice-receptionist#demo",
           screenshots: [
             {
-              src: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/n8n - GoHighLevel - Vapi_AI_Receptionist.png",
+              src: "/projects/n8n/AI%20Assistant%20-%20VAPI%20+%20Twilio%20+%20n8n%20+%20GHL/n8n%20-%20GoHighLevel%20-%20Vapi_AI_Receptionist.png",
               label: "n8n Workflow Screenshot",
               alt: "n8n GoHighLevel Vapi AI receptionist workflow screenshot"
             },
             {
-              src: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/VAPI SCREENSHOT.png",
+              src: "/projects/n8n/AI%20Assistant%20-%20VAPI%20+%20Twilio%20+%20n8n%20+%20GHL/VAPI%20SCREENSHOT.png",
               label: "Vapi Screenshot",
               alt: "Vapi AI receptionist configuration screenshot"
             }
           ],
           demoVideo: {
-            src: "/projects/n8n/AI Assistant - VAPI + Twilio + n8n + GHL/Live Phone Call Demo - Calling Twilio Number GHL n8n Vapi.mp4",
+            src: "/projects/n8n/AI%20Assistant%20-%20VAPI%20+%20Twilio%20+%20n8n%20+%20GHL/Live%20Phone%20Call%20Demo%20-%20Calling%20Twilio%20Number%20GHL%20n8n%20Vapi.mp4",
             type: "video/mp4"
           }
         },
