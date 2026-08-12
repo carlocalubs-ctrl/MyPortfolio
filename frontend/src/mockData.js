@@ -543,12 +543,11 @@ export const portfolioData = {
     },
     {
       id: 4,
-      name: "Flora McGrath",
-      position: "Client",
-      company: "",
-      content: "John was great to work with and consistently delivered reliable, high-quality work. He communicates clearly, understands requirements quickly, and handles automation tasks with attention to detail.",
-      rating: 5,
-      avatar: "/projects/thumbnail/MY%20PICTURE.jpg"
+      name: "Daniel Brooks",
+      position: "Operations Director",
+      company: "Northstar Solutions",
+      content: "John is dependable, detail-oriented, and easy to work with. He quickly understands what needs to be done and builds practical automation solutions that make day-to-day operations more efficient.",
+      rating: 5
     }
   ]
 };
