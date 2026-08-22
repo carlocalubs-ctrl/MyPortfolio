@@ -16,6 +16,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { GoHighLevelCaseStudy } from "@/components/GoHighLevelCaseStudy";
 import { CategoryProjectsPage } from "@/components/CategoryProjectsPage";
 import { ProjectDetailPage } from "@/components/ProjectDetailPage";
+import { NxtLvlCaseStudy } from "@/components/NxtLvlCaseStudy";
+import { NxtLvlGoHighLevelCaseStudy } from "@/components/NxtLvlGoHighLevelCaseStudy";
 
 const HashScroll = () => {
   const location = useLocation();
@@ -78,6 +80,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects/gohighlevel-crm-marketing-automation" element={<GoHighLevelCaseStudy />} />
+          <Route path="/projects/gohighlevel/nxt-lvl-crm-booking-integration" element={<NxtLvlGoHighLevelCaseStudy />} />
+          <Route path="/projects/nxt-lvl-crm-booking-integration" element={<NxtLvlCaseStudy />} />
           <Route path="/projects/:categoryId/:projectSlug" element={<ProjectDetailPage />} />
           <Route path="/projects/:categoryId" element={<CategoryProjectsPage />} />
         </Routes>

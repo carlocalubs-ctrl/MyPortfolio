@@ -210,6 +210,16 @@ export const portfolioData = {
       projects: [
         {
           id: "01",
+          title: "CRM Specialist & Booking Integration",
+          description: "Built and configured a complete GoHighLevel CRM system including pipelines, dashboards, calendars, custom fields, A2P setup, SMS campaign infrastructure, and native automated workflows for NXT LVL Mobile Detailing.",
+          status: "Live",
+          image: "/projects/Gohighlevel/Nxt Lvl Detail/NXT LVL DETAIL LOGO.jpg",
+          thumbnailStyle: "logo",
+          technologies: ["GoHighLevel", "CRM", "Pipelines", "Calendars", "Automation", "A2P", "SMS"],
+          path: "/projects/gohighlevel/nxt-lvl-crm-booking-integration"
+        },
+        {
+          id: "02",
           title: "Solar CRM & Automation System",
           description: "End-to-end GoHighLevel CRM and automation system for managing solar leads, appointments, sales pipelines, follow-ups, and marketing workflows.",
           status: "Live",
@@ -219,15 +229,6 @@ export const portfolioData = {
           path: "/projects/gohighlevel-crm-marketing-automation",
           demoPath: "/projects/gohighlevel-crm-marketing-automation#demo",
           demoUrl: ""
-        },
-        {
-          id: "02",
-          title: "Coming Soon",
-          description: "More GoHighLevel projects will be added soon.",
-          status: "Coming Soon",
-          image: null,
-          technologies: [],
-          path: null
         },
         {
           id: "03",
@@ -360,6 +361,19 @@ export const portfolioData = {
       projects: [
         {
           id: "01",
+          title: "CRM Specialist & Booking Integration",
+          description: "Integrated Fieldd with GoHighLevel through Zapier to automate customer and booking data while supporting a complete CRM, calendar, pipeline, automation, and communication system.",
+          status: "Live",
+          image: "/projects/Gohighlevel/Nxt Lvl Detail/Zapier Automation Booking.png",
+          technologies: ["Zapier", "GoHighLevel", "Fieldd", "Webflow"],
+          path: "/projects/nxt-lvl-crm-booking-integration",
+          demoVideo: {
+            src: "/projects/Gohighlevel/Nxt Lvl Detail/Zapier Automation from Fieldd co to GhL.mp4",
+            type: "video/mp4"
+          }
+        },
+        {
+          id: "02",
           title: "Automated Content Repurposing & Distribution",
           description: "Multi-step Zapier automation that processes content, repurposes it with AI, and distributes formatted outputs across social platforms.",
           status: "Live",
@@ -378,15 +392,6 @@ export const portfolioData = {
             src: "/projects/zapier/Content Repurposing/Content_Repurposing_LOOM.mp4",
             type: "video/mp4"
           }
-        },
-        {
-          id: "02",
-          title: "Coming Soon",
-          description: "More Zapier projects will be added soon.",
-          status: "Coming Soon",
-          image: null,
-          technologies: [],
-          path: null
         },
         {
           id: "03",

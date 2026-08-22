@@ -1,5 +1,7 @@
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
-import { ArrowRight, Code2, PlayCircle } from "lucide-react";
+import { ArrowRight, Code2, PlayCircle, X } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -76,9 +78,34 @@ const ProjectThumbnail = ({ image, title, thumbnailStyle }) => {
 };
 
 export const ProjectCard = ({ project }) => {
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+  const videoRef = useRef(null);
   const isClickable = Boolean(project.path);
   const hasDemo = Boolean(project.demoUrl);
   const hasDemoPath = Boolean(project.demoPath);
+
+  useEffect(() => {
+    if (!isDemoOpen) return undefined;
+
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setIsDemoOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
+      videoRef.current?.pause();
+      if (videoRef.current) videoRef.current.currentTime = 0;
+    };
+  }, [isDemoOpen]);
+
+  const closeDemo = () => {
+    videoRef.current?.pause();
+    if (videoRef.current) videoRef.current.currentTime = 0;
+    setIsDemoOpen(false);
+  };
 
   return (
     <Card className="h-full overflow-hidden border-slate-700 bg-slate-800/50 backdrop-blur-sm transition-all duration-300 hover:border-teal-500/50">
@@ -126,6 +153,17 @@ export const ProjectCard = ({ project }) => {
                 </a>
               </Button>
             )}
+            {project.demoVideo && !hasDemo && !hasDemoPath && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsDemoOpen(true)}
+                className="border-slate-700 px-6 text-slate-300 hover:bg-slate-800 hover:text-white"
+              >
+                <PlayCircle className="mr-2 h-4 w-4" />
+                Watch Demo
+              </Button>
+            )}
             {!hasDemo && hasDemoPath && (
               <Button
                 asChild
@@ -149,6 +187,34 @@ export const ProjectCard = ({ project }) => {
           </Button>
         )}
       </CardContent>
+      {isDemoOpen && project.demoVideo && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-md sm:p-8"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${project.title} demo`}
+          onClick={closeDemo}
+        >
+          <button
+            type="button"
+            onClick={closeDemo}
+            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-white transition-colors hover:bg-slate-700 sm:right-6 sm:top-6"
+            aria-label="Close demo video"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div
+            className="w-full max-w-5xl overflow-hidden rounded-lg border border-slate-700 bg-slate-900 shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <video ref={videoRef} controls preload="metadata" playsInline className="block h-auto w-full">
+              <source src={project.demoVideo.src} type={project.demoVideo.type} />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>,
+        document.body
+      )}
     </Card>
   );
 };
