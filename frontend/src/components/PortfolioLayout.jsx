@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, ChevronRight, Home, FolderOpen, MessageSquare, UserRound, Layers, Mail, Phone, Linkedin, Menu, X, LayoutGrid } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { Footer } from './Footer';
+import { FolderPreview } from './FolderPreview';
 
 const destinations = [
   { title: 'Home', path: '/', icon: Home },
@@ -27,86 +28,16 @@ const projectThumbnails = [
   { src: '/projects/thumbnail/THUMBNAIL%20ZAPIER.png', width: 1672, height: 941 },
 ];
 
-const ProjectThumbnailMarquee = () => {
-  const [next, setNext] = useState(0);
-  const [ready, setReady] = useState(false);
-  const animationRef = useRef(null);
-  const galleryRef = useRef(null);
+const testimonialThumbnails = [
+  { src: '/projects/thumbnail/kameron-testimonial.jpg', video: true },
+  { src: '/projects/thumbnail/MY%20PICTURE.jpg' },
+];
 
-  useEffect(() => {
-    let active = true;
-    Promise.all(projectThumbnails.map((image) => new Promise((resolve) => {
-      const preload = new Image();
-      preload.onload = resolve;
-      preload.onerror = resolve;
-      preload.src = image.src;
-    }))).then(() => {
-      if (active) setReady(true);
-    });
-    return () => { active = false; };
-  }, []);
-
-  useLayoutEffect(() => {
-    const layer = animationRef.current;
-    const card = layer.closest('.home-project-card');
-    const folder = card.querySelector('.folder-art');
-    const gallery = galleryRef.current;
-    const measure = () => {
-      const slotHeight = gallery.clientWidth * (9 / 16) + 8;
-      const flyingWidth = Math.min(card.clientWidth * .465, 96);
-      const flyingHeight = flyingWidth * (9 / 16);
-      layer.style.setProperty('--slot-height', `${slotHeight}px`);
-      layer.style.setProperty('--gallery-height', `${slotHeight * 3}px`);
-      layer.style.setProperty('--flying-width', `${flyingWidth}px`);
-      layer.style.setProperty('--flight-right', `${card.clientWidth - gallery.offsetLeft - gallery.clientWidth + ((gallery.clientWidth - flyingWidth) / 2)}px`);
-      const landingY = gallery.offsetTop + gallery.clientHeight - slotHeight;
-      const landingX = gallery.offsetLeft + ((gallery.clientWidth - flyingWidth) / 2);
-      const openingY = folder.offsetTop + folder.clientHeight * .42;
-      const startX = folder.offsetLeft + (folder.clientWidth / 2) - (flyingWidth / 2);
-      const startY = openingY - (flyingHeight * .46);
-      layer.style.setProperty('--throw-x', `${startX - landingX}px`);
-      layer.style.setProperty('--throw-y', `${startY - landingY}px`);
-      layer.style.setProperty('--arc-y', `${startY - 13 - landingY}px`);
-      layer.style.setProperty('--landing-y', `${landingY}px`);
-    };
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(card);
-    observer.observe(gallery);
-    return () => observer.disconnect();
-  }, []);
-
-  // Two residents followed by the incoming image. At the cycle boundary the
-  // top resident is removed, exactly matching the completed one-row movement.
-  const sequence = Array.from({ length: 3 }, (_, index) =>
-    projectThumbnails[(next + index + projectThumbnails.length - 2) % projectThumbnails.length]
-  );
-  return (
-    <div
-      ref={animationRef}
-      className="home-project-animation"
-      data-ready={ready}
-      aria-hidden="true"
-      onAnimationIteration={(event) => {
-        if (event.target === event.currentTarget) {
-          setNext((index) => (index + 1) % projectThumbnails.length);
-        }
-      }}
-    >
-      <div ref={galleryRef} className="home-project-gallery overflow-hidden">
-        <div className="home-project-track">
-          {sequence.map((image, index) => (
-            <div className={`home-project-image-slot${index === 2 ? ' incoming' : ''}`} key={index}>
-              <img {...image} alt="" className="block rounded-md" decoding="async" draggable="false" />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="home-project-flying">
-        <img {...projectThumbnails[next]} alt="" className="block rounded-md" decoding="async" draggable="false" />
-      </div>
-    </div>
-  );
+const folderImages = {
+  '/projects': projectThumbnails,
+  '/testimonials': testimonialThumbnails,
+  '/tech-stack': ['GoHighLevel.svg', 'n8n.svg', 'Make.svg', 'Zapier_.svg', 'Claude.svg', 'Twilio.svg']
+    .map((name) => ({ src: '/projects/Logo/' + name })),
 };
 
 export const FolderCard = ({ title, path, description, icon: Icon = FolderOpen, index = 0, showProjectGallery = false }) => (
@@ -117,11 +48,11 @@ export const FolderCard = ({ title, path, description, icon: Icon = FolderOpen, 
     </div>
     <span className="folder-label">{title}<ArrowUpRight size={16} /></span>
     <span className="folder-description">{description}</span>
-    {showProjectGallery && <ProjectThumbnailMarquee />}
+    {showProjectGallery && <FolderPreview images={folderImages[path]} testimonial={path === '/testimonials'} />}
   </Link>
 );
 
-export const FolderGrid = ({ items, showProjectGallery = false }) => <div className="folder-grid">{items.map((item, index) => <FolderCard key={item.path} {...item} index={index} showProjectGallery={showProjectGallery && item.path === '/projects'} />)}</div>;
+export const FolderGrid = ({ items, showProjectGallery = false }) => <div className={`folder-grid${showProjectGallery ? ' folder-preview-grid' : ''}`}>{items.map((item, index) => <FolderCard key={item.path} {...item} index={index} showProjectGallery={showProjectGallery && Boolean(folderImages[item.path]?.length)} />)}</div>;
 
 export const HomeExplorer = () => (
   <section className="explorer-page">

@@ -3,6 +3,13 @@ import { Star, Quote } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { ScrollReveal } from '../hooks/useScrollReveal';
 
+const FeaturedBadge = () => (
+  <span className="inline-flex w-fit items-center gap-1 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 px-3 py-1 text-xs font-semibold text-white">
+    <Star className="h-3 w-3 fill-white" />
+    Featured Testimonial
+  </span>
+);
+
 export const Testimonials = () => {
   const { testimonials } = portfolioData;
   const featured = testimonials.find((t) => t.featured);
@@ -25,81 +32,64 @@ export const Testimonials = () => {
           </div>
         </ScrollReveal>
 
-        {/* Featured Testimonial */}
+        {/* Equal-size featured cards; DOM order also defines the mobile order. */}
         {featured && (
           <ScrollReveal>
-            <div className="max-w-6xl mx-auto mb-12">
-            <Card
-              data-testid="testimonial-featured-card"
-              className="overflow-hidden bg-slate-800/50 border-slate-700 hover:border-teal-500/50 transition-all duration-300 backdrop-blur-sm"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                {/* Left: Full Photo */}
-                <div className="relative h-72 bg-slate-900 sm:h-80 md:h-auto md:min-h-[520px]">
-                  {featured.fullImage ? (
-                    <img
-                      src={featured.fullImage}
-                      alt={`John Carlo with ${featured.name}`}
-                      className="absolute inset-0 block h-full w-full object-cover object-center"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 flex items-center justify-center">
-                      <div className="text-center px-8">
-                        <Quote className="w-16 h-16 text-teal-300 mx-auto mb-5" />
-                        <div className="text-white text-3xl font-bold">Client Feedback</div>
-                      </div>
-                    </div>
-                  )}
-                  {/* Soft right-edge gradient to blend into card */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-800/40 md:to-slate-800/60 pointer-events-none"></div>
-
-                  {/* "Featured" Badge */}
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-white" />
-                    Featured Testimonial
-                  </div>
+            <div className="mx-auto mb-12 grid max-w-6xl grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+              <Card
+                id="kameron-testimonial"
+                data-testid="testimonial-featured-kameron-card"
+                className="flex min-w-0 flex-col overflow-hidden border-slate-700 bg-slate-800/50 p-5 backdrop-blur-sm transition-all duration-300 hover:border-teal-500/50 sm:p-6"
+              >
+                <FeaturedBadge />
+                <div className="flex flex-1 items-center justify-center py-5">
+                  <video
+                    controls
+                    playsInline
+                    preload="metadata"
+                    poster="/projects/thumbnail/kameron-testimonial.jpg"
+                    src="/projects/thumbnail/testimonial.mp4"
+                    aria-label="Video testimonial from Kameron Jones, Founder of Nxtlvl Mobile Detail"
+                    className="block h-auto max-h-[520px] w-auto max-w-full rounded-lg bg-black object-contain"
+                  >
+                    Your browser does not support embedded video.{' '}
+                    <a href="/projects/thumbnail/testimonial.mp4">Download Kameron's testimonial video</a>.
+                  </video>
                 </div>
+                <div className="mt-auto border-t border-slate-700 pt-5">
+                  <div className="mb-1 text-xl font-semibold text-white">Kameron Jones</div>
+                  <div className="text-sm font-medium text-teal-400">Founder</div>
+                  <div className="text-sm text-slate-500">Nxtlvl Mobile Detail</div>
+                </div>
+              </Card>
 
-                {/* Right: Text Content */}
-                <CardContent className="p-8 md:p-10 flex flex-col justify-center">
-                  {/* Quote icon row */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center">
-                      <Quote className="w-6 h-6 text-teal-400" />
-                    </div>
-                  </div>
-
-                  {/* Rating */}
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(featured.rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <p className="text-slate-200 text-lg leading-relaxed italic mb-6">
-                    &ldquo;{featured.content}&rdquo;
-                  </p>
-
-                  {/* Author Details */}
-                  <div className="border-t border-slate-700 pt-5">
-                    <div className="font-semibold text-white text-xl mb-1">
-                      {featured.name}
-                    </div>
-                    <div className="text-sm text-teal-400 font-medium">
-                      {featured.position}
-                    </div>
-                    <div className="text-sm text-slate-500">
-                      {featured.company}
-                    </div>
-                  </div>
-                </CardContent>
-              </div>
-            </Card>
-          </div>
+              <Card
+                id="flora-testimonial"
+                data-testid="testimonial-featured-card"
+                className="flex min-w-0 flex-col overflow-hidden border-slate-700 bg-slate-800/50 p-5 backdrop-blur-sm transition-all duration-300 hover:border-teal-500/50 sm:p-6"
+              >
+                <FeaturedBadge />
+                <img
+                  src="/projects/thumbnail/MY%20PICTURE.jpg"
+                  alt={`John Carlo with ${featured.name}`}
+                  className="mx-auto my-5 block h-auto max-h-[260px] w-auto max-w-full rounded-lg object-contain"
+                  decoding="async"
+                />
+                <div className="mb-4 flex gap-1" aria-label={`${featured.rating} out of 5 stars`}>
+                  {[...Array(featured.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="mb-6 text-lg italic leading-relaxed text-slate-200">
+                  &ldquo;{featured.content}&rdquo;
+                </p>
+                <div className="mt-auto border-t border-slate-700 pt-5">
+                  <div className="mb-1 text-xl font-semibold text-white">{featured.name}</div>
+                  <div className="text-sm font-medium text-teal-400">{featured.position}</div>
+                  <div className="text-sm text-slate-500">{featured.company}</div>
+                </div>
+              </Card>
+            </div>
           </ScrollReveal>
         )}
 
