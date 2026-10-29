@@ -19,9 +19,6 @@ import {
   Workflow,
   X,
 } from "lucide-react";
-import { AnimatedBackground } from "./AnimatedBackground";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -455,10 +452,8 @@ export const GoHighLevelCaseStudy = () => {
 
   return (
     <div className="project-page min-h-screen relative" style={{ background: "#0f172a" }}>
-      <AnimatedBackground />
       <div className="relative z-10">
-        <Header />
-        <nav className="sticky top-16 z-30 backdrop-blur-md">
+        <nav className="sticky top-0 z-30 backdrop-blur-md">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex gap-2 overflow-x-auto py-3 md:justify-center sm:justify-start">
               <Link
@@ -480,7 +475,7 @@ export const GoHighLevelCaseStudy = () => {
             </div>
           </div>
         </nav>
-        <main className="pt-16">
+        <div className="detail-content">
           <section className="relative overflow-hidden pt-10 pb-20 sm:pt-5 sm:pb-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 min-[640px]:max-[768px]:hidden">
               <Link
@@ -636,8 +631,7 @@ export const GoHighLevelCaseStudy = () => {
               </ScrollReveal>
             </div>
           </section>
-        </main>
-        <Footer />
+        </div>
       </div>
 
       {activeGallery &&

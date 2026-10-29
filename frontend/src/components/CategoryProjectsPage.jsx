@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { AnimatedBackground } from "./AnimatedBackground";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
 import { ScrollReveal } from "../hooks/useScrollReveal";
 import { portfolioData } from "../mockData";
 import { ProjectCard } from "./ProjectCards";
@@ -12,6 +9,7 @@ import { ProjectCategoryNav } from "./ProjectCategoryNav";
 export const CategoryProjectsPage = () => {
   const { categoryId } = useParams();
   const category = portfolioData.platformProjects[categoryId];
+  const overview = portfolioData.projectCategories.find((item) => item.id === categoryId);
 
   useEffect(() => {
     if (category) {
@@ -25,10 +23,8 @@ export const CategoryProjectsPage = () => {
 
   return (
     <div className="min-h-screen relative" style={{ background: "#0f172a" }}>
-      <AnimatedBackground />
       <div className="relative z-10">
-        <Header />
-        <main className="pt-16">
+        <div className="detail-content">
           <section className="relative overflow-hidden py-20 sm:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <Link
@@ -50,6 +46,18 @@ export const CategoryProjectsPage = () => {
                     {category.subtitle}
                   </p>
                   <ProjectCategoryNav activeCategory={categoryId} />
+                  {overview && (
+                    <details className="mt-6 rounded-xl border border-slate-700 bg-slate-800/30 p-5">
+                      <summary className="cursor-pointer text-sm font-medium text-teal-300">About this collection</summary>
+                      <div className="mt-5 grid gap-5 sm:grid-cols-2 items-center">
+                        <img src={overview.image} alt={overview.title} className="w-full rounded-lg" loading="lazy" />
+                        <div>
+                          <p className="text-sm leading-relaxed text-slate-300">{overview.description}</p>
+                          <div className="mt-4 flex flex-wrap gap-2">{overview.technologies.map((tech) => <span key={tech} className="rounded-md border border-slate-700 px-3 py-1 text-xs text-slate-300">{tech}</span>)}</div>
+                        </div>
+                      </div>
+                    </details>
+                  )}
                 </div>
               </ScrollReveal>
             </div>
@@ -66,8 +74,7 @@ export const CategoryProjectsPage = () => {
               </div>
             </div>
           </section>
-        </main>
-        <Footer />
+        </div>
       </div>
     </div>
   );

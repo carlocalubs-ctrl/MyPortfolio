@@ -9,9 +9,6 @@ import {
   GitBranch,
   X,
 } from "lucide-react";
-import { AnimatedBackground } from "./AnimatedBackground";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { ScrollReveal } from "../hooks/useScrollReveal";
 
@@ -87,10 +84,8 @@ export const NxtLvlCaseStudy = () => {
 
   return (
     <div className="project-page relative min-h-screen" style={{ background: "#0f172a" }}>
-      <AnimatedBackground />
       <div className="relative z-10">
-        <Header />
-        <main className="pt-16">
+        <div className="detail-content">
           <section className="relative overflow-hidden py-16 sm:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <Link
@@ -200,8 +195,7 @@ export const NxtLvlCaseStudy = () => {
               );
             })}
           </div>
-        </main>
-        <Footer />
+        </div>
       </div>
 
       {activeScreenshot && createPortal(

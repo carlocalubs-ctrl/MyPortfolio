@@ -3,12 +3,13 @@ import { portfolioData } from "../mockData";
 
 export const ProjectCategoryNav = ({ activeCategory = "all" }) => {
   const items = [
-    { id: "all", title: "All Projects", path: "/#works" },
+    { id: "all", title: "All Projects", path: "/projects" },
     ...portfolioData.projectCategories.map((category) => ({
       id: category.id,
       title: category.title,
       path: category.path,
     })),
+    { id: "websites", title: "Websites", path: "/projects/websites" },
   ];
 
   return (

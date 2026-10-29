@@ -1,3 +1,4 @@
+import { portfolioData } from '../mockData';
 import { ScrollReveal } from "../hooks/useScrollReveal";
 
 const logoBasePath = "/projects/Logo";
@@ -81,26 +82,23 @@ export const ToolsPlatforms = () => {
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <div className="tools-marquee-rows" aria-label="Tools and platforms">
+          <div className="space-y-8" aria-label="Tools and platforms">
             {toolRows.map((row) => (
-              <div className="tools-marquee" key={row.label} aria-label={row.label}>
-                <div className="tool-platform-fade tool-platform-fade-left" />
-                <div className="tool-platform-fade tool-platform-fade-right" />
-                <div className={`tools-marquee-track tools-marquee-${row.direction}`}>
-                  <div className="tools-marquee-set">
-                    {row.tools.map((tool) => (
-                      <ToolCard key={tool.name} tool={tool} />
-                    ))}
-                  </div>
-
-                  <div className="tools-marquee-set" aria-hidden="true">
-                    {row.tools.map((tool) => (
-                      <ToolCard key={`${tool.name}-duplicate`} tool={tool} />
-                    ))}
-                  </div>
+              <div key={row.label}>
+                <h3 className="mb-4 text-sm font-semibold text-teal-300">{row.label}</h3>
+                <div className="workspace-tools-grid">
+                  {row.tools.map((tool) => <ToolCard key={tool.name} tool={tool} />)}
                 </div>
               </div>
             ))}
+            <div>
+              <h3 className="mb-4 text-sm font-semibold text-teal-300">Accounting & additional skills</h3>
+              <div className="flex flex-wrap gap-3">
+                {['Xero', ...portfolioData.skills.map((skill) => skill.name)].map((name) => (
+                  <span className="rounded-lg border border-slate-700 bg-slate-800/50 px-4 py-3 text-sm text-slate-200" key={name}>{name}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </ScrollReveal>
       </div>

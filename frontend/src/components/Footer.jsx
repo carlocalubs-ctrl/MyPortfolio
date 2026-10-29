@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Mail, Phone, Linkedin, Github, Heart } from 'lucide-react';
 import { portfolioData } from '../mockData';
 
@@ -5,11 +6,10 @@ export const Footer = () => {
   const { name, email, phone, linkedin } = portfolioData;
   const currentYear = new Date().getFullYear();
 
+  const navigate = useNavigate();
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    const destinations = { home: '/', services: '/about#services', experience: '/about#experience', works: '/projects', testimonials: '/testimonials', contact: '/contact' };
+    navigate(destinations[sectionId] || '/');
   };
 
   return (

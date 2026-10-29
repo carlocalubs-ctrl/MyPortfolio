@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ArrowRight, Download, Zap, Bot } from 'lucide-react';
 import { portfolioData } from '../mockData';
@@ -5,11 +6,9 @@ import { portfolioData } from '../mockData';
 export const Hero = () => {
   const { hero, profileImage, profileVideo } = portfolioData;
 
+  const navigate = useNavigate();
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigate(sectionId === 'works' ? '/projects' : '/contact');
   };
 
   return (

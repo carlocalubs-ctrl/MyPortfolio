@@ -1,0 +1,228 @@
+/* Presentation overrides for the retained portfolio components. */
+:root {
+  --background: 48 33% 97%;
+  --foreground: 34 8% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 34 8% 16%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 34 8% 16%;
+  --primary: 15 63% 60%;
+  --primary-foreground: 34 8% 16%;
+  --secondary: 48 25% 92%;
+  --secondary-foreground: 34 8% 16%;
+  --muted: 48 25% 92%;
+  --muted-foreground: 37 6% 41%;
+  --accent: 23 73% 81%;
+  --accent-foreground: 34 8% 16%;
+  --border: 42 20% 87%;
+  --input: 42 20% 87%;
+  --ring: 15 63% 60%;
+}
+
+body, button, input, textarea, select, .font-sans, .font-mono, code {
+  font-family: "DM Sans", sans-serif;
+}
+.portfolio-workspace :is(h1, h2, h3, h4, h5, h6, .font-bold, .font-extrabold) { font-weight: 600; }
+.portfolio-workspace p { font-weight: 400; }
+
+/* Two bounded radial gradients give a blurred appearance without expensive filters. */
+.workspace-main { position: relative; isolation: isolate; overflow: clip; }
+.workspace-main::before, .workspace-main::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  width: min(55vw, 660px);
+  height: min(55vw, 660px);
+  border-radius: 50%;
+  opacity: .24;
+  background: radial-gradient(ellipse, #F2C7AD 0%, #F2C7AD66 30%, transparent 70%);
+  animation: warm-orb-float 32s ease-in-out infinite alternate;
+}
+.workspace-main::before { top: 8%; right: -12%; }
+.workspace-main::after {
+  top: 46%; left: -18%;
+  background: radial-gradient(ellipse, #DED3BC 0%, #DED3BC55 32%, transparent 70%);
+  animation-duration: 40s;
+  animation-delay: -16s;
+}
+@keyframes warm-orb-float {
+  from { transform: translate3d(0, 0, 0) scale(1); opacity: .18; }
+  to { transform: translate3d(-24px, 32px, 0) scale(1.08); opacity: .3; }
+}
+
+/* Existing Tailwind slate surfaces and text keep their hierarchy in the light palette. */
+.workspace-content :is([class*="bg-slate-"], .tool-platform-card) { background-color: #FFFFFF; }
+.workspace-content :is([class*="text-slate-1"], [class*="text-slate-2"], [class*="text-slate-3"], .text-white) { color: #2D2A26; }
+.workspace-content :is([class*="text-slate-4"], [class*="text-slate-5"], [class*="text-slate-6"]) { color: #706B63; }
+.workspace-content :is([class*="border-slate-"], [class*="border-teal-"], [class*="border-emerald-"], .tool-platform-card, .tool-platform-mark) { border-color: #E5E1D8; }
+.workspace-content :is([class*="text-teal-"], [class*="text-emerald-"], [class*="text-cyan-"]) { color: #C56545; }
+.workspace-content :is([class*="bg-teal-"], [class*="bg-emerald-"], [class*="bg-cyan-"]) { background-color: #F7E5DA; }
+.workspace-content :is(.bg-teal-400, .bg-emerald-400, .bg-cyan-400) { background-color: #D97757; }
+.workspace-content [class*="bg-gradient-"] {
+  --tw-gradient-from: #F0EEE6 var(--tw-gradient-from-position);
+  --tw-gradient-to: #FAF9F5 var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.workspace-content .bg-clip-text {
+  background-image: none;
+  color: #2D2A26;
+  -webkit-text-fill-color: currentColor;
+}
+.workspace-content .bg-clip-text:is([class*="from-teal-"], [class*="from-emerald-"], [class*="from-cyan-"]) { color: #C56545; }
+.workspace-content :is(a, button):is([class*="from-teal-"], [class*="from-emerald-"]),
+.workspace-content a.bg-teal-500\/90 {
+  background: #D97757;
+  border-color: #D97757;
+  color: #2D2A26;
+  box-shadow: none;
+}
+.workspace-content :is(a, button):is([class*="from-teal-"], [class*="from-emerald-"]):hover,
+.workspace-content a.bg-teal-500\/90:hover { background: #C56545; border-color: #C56545; color: #FFFFFF; }
+.workspace-content :is(a, button):is([class*="hover:text-teal-"], [class*="hover:text-white"]):hover { color: #C56545; }
+.workspace-content :is(a, button)[class*="hover:bg-slate-"]:hover { background-color: #F0EEE6; }
+.workspace-content :is([class*="hover:border-teal-"], .tool-platform-card):hover { border-color: #D97757; }
+.workspace-content :is([class*="shadow-teal-"], [class*="shadow-emerald-"], [class*="shadow-black"], .tool-platform-card) { --tw-shadow-color: #2D2A260A; box-shadow: 0 6px 24px #2D2A260A; }
+.workspace-content :is(input, textarea, select) { background: #FFFFFF; color: #2D2A26; border-color: #E5E1D8; }
+.workspace-content :is(input, textarea)::placeholder { color: #706B63; }
+.workspace-content :is(input, textarea, select):focus { border-color: #D97757; }
+.workspace-content .tool-platform-mark { background: #F0EEE6; }
+.workspace-content .tool-platform-card:hover { background: #FFFFFF; box-shadow: 0 8px 24px #D9775710; }
+.workspace-content .tool-platform-card:hover .tool-platform-mark { border-color: #F2C7AD; box-shadow: none; }
+.workspace-content .tool-platform-card:hover span { color: #2D2A26; }
+.workspace-content .project-overview-icon { color: #C56545; background: #FFFFFF; border-color: #E5E1D8; box-shadow: 0 6px 20px #2D2A2608; }
+.workspace-content :is(.project-overview-number, .project-overview-connector) { color: #C56545; }
+.workspace-content .project-overview-title { color: #2D2A26; }
+.workspace-content .project-overview-connector span { background: #F2C7AD; }
+.workspace-content .project-overview-step:hover .project-overview-icon { background: #F7E5DA; border-color: #D97757; color: #C56545; box-shadow: none; }
+.workspace-content .project-overview-step:hover .project-overview-title { color: #C56545; }
+.workspace-content .project-funnel-scroll-preview { scrollbar-color: #D97757 #F0EEE6; }
+.workspace-content .animate-pulse-glow { opacity: .12; animation: none; }
+.workspace-content :is(.animate-ping, .animate-bounce) { animation: none; }
+.workspace-content #hero video { mix-blend-mode: normal !important; filter: none !important; }
+.workspace-content [class*="blur-3xl"] { filter: blur(20px); opacity: .12; }
+.workspace-content .text-amber-400 { color: #8F541E; }
+.workspace-content .text-yellow-400 { color: #A16B25; }
+.workspace-content .fill-yellow-400 { fill: #A16B25; }
+.workspace-content .fill-white { fill: currentColor; }
+.workspace-content .text-teal-500\/10 { color: #D977571A; }
+.workspace-content .group:hover [class*="group-hover:text-white"] { color: #2D2A26; }
+.workspace-content #contact button > .absolute.bottom-0 { background: #D97757; }
+.workspace-content #contact h3 > span { background: #D97757; }
+
+.folder-card:active { background: #F7E5DA; border-color: #D97757; }
+.sidebar-socials a:hover, .sidebar-link:hover { color: #C56545; }
+.workspace-back, .workspace-topbar a { color: #C56545; }
+.workspace-skip { color: #2D2A26; }
+.custom-cursor { border-color: #D9775780; mix-blend-mode: normal; }
+.custom-cursor-dot { background: #D97757; }
+.custom-cursor.cursor-hover { background: #D9775710; border-color: #C56545; }
+::selection { background: #F2C7AD; color: #2D2A26; }
+::-webkit-scrollbar-track { background: #F0EEE6; }
+::-webkit-scrollbar-thumb { background: #D97757; }
+::-webkit-scrollbar-thumb:hover { background: #C56545; }
+
+@media (max-width: 768px) {
+  .workspace-main::before, .workspace-main::after { width: 360px; height: 360px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace-main::before, .workspace-main::after { animation: none; transform: none; opacity: .18; }
+  .custom-cursor, .custom-cursor-dot { transition: none; }
+}
+
+/* Home Projects card only: synchronized folder, flight, and gallery timeline. */
+.home-project-card { position: relative; overflow: hidden; }
+.home-project-card > :is(.folder-art, .folder-label, .folder-description) { width: 41%; min-width: 0; }
+.home-project-card .folder-art { max-width: 120px; height: auto; aspect-ratio: 160 / 116; }
+.home-project-card .folder-art > svg:last-child { left: 50%; top: 62%; transform: translate(-50%, -50%); }
+.home-project-card .folder-label { gap: 4px; }
+.home-project-card .folder-label > svg { width: 12px; flex-shrink: 0; }
+.home-project-gallery {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 55%;
+  height: var(--gallery-height, 210px);
+  margin-top: calc(var(--gallery-height, 210px) / -2);
+  pointer-events: auto;
+  container-type: size;
+  -webkit-mask-image: linear-gradient(transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(transparent, black 10%, black 90%, transparent);
+}
+
+.home-project-animation {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  --slot-height: 40px;
+  --gallery-height: 210px;
+  --flying-width: 96px;
+  --flight-right: 8px;
+  animation: project-cycle-clock 2.9s linear infinite;
+  z-index: 1;
+}
+.home-project-card > :is(.folder-label, .folder-description) { position: relative; z-index: 4; }
+.home-project-card .folder-art { position: relative; z-index: 3; animation: project-folder-open 2.9s linear infinite; transform-origin: 50% 85%; }
+.home-project-card .folder-front { transform-box: fill-box; transform-origin: center bottom; animation: project-folder-flap 2.9s linear infinite; }
+.home-project-gallery {
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, black 10%, black calc(100% - 8px), transparent);
+  mask-image: linear-gradient(transparent, black 10%, black calc(100% - 8px), transparent);
+}
+.home-project-track { animation: project-gallery-advance 2.9s linear infinite; will-change: transform; }
+.home-project-image-slot {
+  height: var(--slot-height);
+  padding-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+.home-project-image-slot img, .home-project-flying img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #E5E1D8;
+}
+.home-project-image-slot.incoming { animation: project-image-arrives 2.9s steps(1, end) infinite; }
+.home-project-flying {
+  position: absolute;
+  top: var(--landing-y);
+  right: var(--flight-right);
+  width: var(--flying-width);
+  transform-origin: center top;
+  animation: project-thumbnail-flight 2.9s linear infinite;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 4px 5px rgba(45, 42, 38, .12));
+}
+.home-project-card:is(:hover, :focus) :is(.home-project-animation, .home-project-track, .home-project-flying, .incoming, .folder-art, .folder-front) { animation-play-state: paused; }
+.home-project-card:has(.home-project-animation[data-ready="false"]) :is(.home-project-animation, .home-project-track, .home-project-flying, .incoming, .folder-art, .folder-front) { animation-play-state: paused; }
+@keyframes project-cycle-clock { from { opacity: 1; } to { opacity: 1; } }
+@keyframes project-folder-open {
+  0%, 10.3448%, 58.6207%, 100% { transform: rotate(0); }
+  5%, 20% { transform: rotate(-7deg); }
+  35% { transform: rotate(2deg); }
+}
+@keyframes project-folder-flap {
+  0%, 58.6207%, 100% { transform: scaleY(1) skewX(0); }
+  10.3448%, 30% { transform: scaleY(.8) skewX(-6deg); }
+}
+@keyframes project-thumbnail-flight {
+  0%, 10.3448% { opacity: 0; transform: translate(var(--throw-x), var(--throw-y)) rotate(-3deg) scale(.46); }
+  15% { opacity: 1; transform: translate(var(--throw-x), var(--arc-y)) rotate(-3deg) scale(.55); }
+  38% { opacity: 1; transform: translate(calc(var(--throw-x) * .22), var(--arc-y)) rotate(3deg) scale(.84); animation-timing-function: ease-in; }
+  48% { opacity: 1; transform: translate(0, var(--arc-y)) rotate(1deg) scale(.95); animation-timing-function: ease-out; }
+  58.6206% { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
+  58.6207%, 100% { opacity: 0; transform: translate(0, 0) rotate(0) scale(1); }
+}
+@keyframes project-image-arrives {
+  0% { opacity: 0; }
+  58.6207% { opacity: 1; transform: scale(.86); }
+  82.7586%, 100% { opacity: 1; transform: scale(1); }
+}
+@keyframes project-gallery-advance {
+  0%, 58.6207% { transform: translateY(0); animation-timing-function: ease-in-out; }
+  82.7586%, 100% { transform: translateY(calc(-1 * var(--slot-height))); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-project-animation, .home-project-track, .home-project-card .folder-art, .home-project-card .folder-front, .home-project-image-slot.incoming { animation: none; transform: none; opacity: 1; will-change: auto; }
+  .home-project-flying { display: none; animation: none; will-change: auto; }
+}
