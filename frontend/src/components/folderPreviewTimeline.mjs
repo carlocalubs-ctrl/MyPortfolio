@@ -9,8 +9,11 @@ export function previewGeometry({ width, height, compact = false, testimonial = 
   const left = Math.max(folder.x + folder.width, textRight) + gap;
   const previewWidth = Math.min(maxWidth, Math.max(1, right - left));
   const heights = ratios.map((ratio) => previewWidth / ratio);
-  const x = right - previewWidth;
-  const top = compact ? Math.max(padding, height - 22 - heights[0] - heights[1] - gap) : padding;
+  const x = left + (right - left - previewWidth) / 2;
+  // Center the settled stack in its available area while retaining the existing
+  // 18px clearance for the curved flight. This never changes the card's size.
+  const stackHeight = heights[0] + heights[1] + gap;
+  const top = padding + Math.max(0, (height - padding * 2 - stackHeight - 18) / 2);
   return {
     width: previewWidth, heights, x, top, gap, compact, testimonial,
     startX: folder.x + folder.width - previewWidth,

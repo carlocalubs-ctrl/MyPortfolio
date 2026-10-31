@@ -11,6 +11,7 @@ export const FolderPreview = ({ images, testimonial = false }) => {
     const card = layer.parentElement;
     const folder = card.querySelector('.folder-art');
     const label = card.querySelector('.folder-label');
+    const description = card.querySelector('.folder-description');
     const nodes = Array.from(layer.children);
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     const cycle = CYCLE_MS + (testimonial ? 1500 : 0);
@@ -18,17 +19,31 @@ export const FolderPreview = ({ images, testimonial = false }) => {
     let loadedImages = [];
     const setBatch = (nextBatch) => {
       const selected = nodes.map((_, index) => loadedImages[(nextBatch * 2 + index) % loadedImages.length]);
-      geometry = previewGeometry({
+      const padding = parseFloat(getComputedStyle(card).paddingTop);
+      const folderPosition = { x: folder.offsetLeft, y: folder.offsetTop, width: folder.clientWidth, height: folder.clientHeight };
+      const options = {
         width: card.clientWidth,
         height: card.clientHeight,
-        compact: testimonial || card.getAttribute('href') === '/projects',
+        compact: true,
         testimonial,
-        maxWidth: testimonial ? 120 : 200,
-        padding: parseFloat(getComputedStyle(card).paddingTop),
-        folder: { x: folder.offsetLeft, y: folder.offsetTop, width: folder.clientWidth, height: folder.clientHeight },
+        maxWidth: testimonial ? 120 : card.getAttribute('href') === '/tech-stack' ? 72 : 160,
+        padding,
+        folder: folderPosition,
         textRight: label.offsetLeft + label.clientWidth,
         ratios: selected.map((image) => image.ratio),
-      });
+      };
+      geometry = previewGeometry(options);
+      // Align the information group to the settled media, not the card center.
+      // Translations leave the in-flow spacer and all outer dimensions intact.
+      const contentHeight = description.offsetTop + description.offsetHeight - folder.offsetTop;
+      const stackHeight = geometry.heights[0] + geometry.heights[1] + geometry.gap;
+      const centeredOffset = geometry.top + stackHeight / 2 - folder.offsetTop - contentHeight / 2;
+      // Retain clearance for the existing flight without changing its curve.
+      const flightLimit = card.clientHeight - padding - Math.max(...geometry.heights) - 18
+        - folder.offsetTop - folder.clientHeight * .55;
+      const contentOffset = Math.max(0, Math.min(centeredOffset, flightLimit));
+      card.style.setProperty('--folder-content-offset', contentOffset + 'px');
+      geometry = previewGeometry({ ...options, folder: { ...folderPosition, y: folderPosition.y + contentOffset } });
       nodes.forEach((node, index) => {
         node.style.opacity = 0;
         node.querySelector('img').src = selected[index].src;
@@ -42,28 +57,19 @@ export const FolderPreview = ({ images, testimonial = false }) => {
       const padding = parseFloat(getComputedStyle(card).paddingTop);
       const initial = previewGeometry({
         width: card.clientWidth, height: card.clientHeight,
-        maxWidth: testimonial ? 120 : 200,
+        maxWidth: testimonial ? 120 : card.getAttribute('href') === '/tech-stack' ? 72 : 160,
         padding: parseFloat(getComputedStyle(card).paddingTop),
         folder: { x: folder.offsetLeft, y: folder.offsetTop, width: folder.clientWidth, height: folder.clientHeight },
         textRight: label.offsetLeft + label.clientWidth,
       });
       const tallest = Math.max(...loadedImages.map((image) => initial.width / image.ratio));
-      // Reserve space for the tallest pair, including the curved flight, once
-      // per resize. Source changes never resize the card during a cycle.
-      const launchOffset = Math.max(4, tallest + 10 - folder.clientHeight * .55);
-      card.style.setProperty('--preview-launch-margin', `${launchOffset}px`);
-      // The Projects text column already contains its landscape-image flight.
-      // Let that content set its height instead of reserving a taller box.
-      if (testimonial || card.getAttribute('href') === '/projects') {
-        card.style.removeProperty('min-height');
-        card.style.setProperty('--preview-launch-margin', '4px');
-        const stackHeight = testimonial
-          ? loadedImages.reduce((sum, image) => sum + initial.width / image.ratio, 10)
-          : tallest * 2 + 10;
-        card.style.setProperty('--preview-stack-height', `${stackHeight}px`);
-      } else {
-        card.style.minHeight = `${padding * 2 + tallest * 2 + 40}px`;
-      }
+      // Reserve the largest pair and the curved flight below its destination.
+      // Image swaps never resize the row during a cycle.
+      const stackHeight = testimonial
+        ? loadedImages.reduce((sum, image) => sum + initial.width / image.ratio, 10)
+        : tallest * 2 + 10;
+      const flightHeight = Math.max(stackHeight, folder.offsetTop + folder.clientHeight * .55 - padding + tallest) + 18;
+      card.style.setProperty('--preview-stack-height', flightHeight + 'px');
       setBatch(0);
       // Hide before restarting after resize; never move a visible settled file.
       nodes.forEach((node) => { node.style.opacity = 0; });
@@ -117,9 +123,8 @@ export const FolderPreview = ({ images, testimonial = false }) => {
       cancelAnimationFrame(resizeFrame);
       observer.disconnect();
       motion.removeEventListener('change', restart);
-      card.style.removeProperty('--preview-launch-margin');
-      card.style.removeProperty('min-height');
       card.style.removeProperty('--preview-stack-height');
+      card.style.removeProperty('--folder-content-offset');
     };
   }, [images, testimonial]);
   return <div className="folder-preview" ref={layerRef} aria-hidden="true">

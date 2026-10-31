@@ -15,16 +15,16 @@ export const Services = () => {
   const { services } = portfolioData;
 
   return (
-    <section id="services" className="relative py-20 bg-slate-900/60 backdrop-blur-[2px]">
+    <section id="services" className="services-page relative py-20 bg-slate-900/60 backdrop-blur-[2px]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-4">
               <span className="bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                 Services I Offer
               </span>
-            </h2>
+            </h1>
             <p className="text-lg text-slate-400">
               Comprehensive solutions to streamline your business operations and enhance customer experiences
             </p>
@@ -32,13 +32,13 @@ export const Services = () => {
         </ScrollReveal>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="services-offerings-grid grid gap-4">
           {services.map((service, index) => {
             const IconComponent = iconMap[service.icon];
             return (
               <ScrollReveal key={service.id} delay={index * 100}>
                 <Card
-                  className="bg-slate-800/50 border-slate-700 hover:border-teal-500/50 transition-all duration-300 hover:transform hover:scale-105 backdrop-blur-sm group h-full"
+                  className="bg-slate-800/50 border-slate-700 hover:border-teal-500/50 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm group h-full"
                 >
                 <CardHeader>
                   <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center mb-4 group-hover:from-teal-500/30 group-hover:to-emerald-500/30 transition-all">
@@ -69,11 +69,11 @@ export const Services = () => {
 
         {/* Skills Section */}
         <ScrollReveal delay={200}>
-          <div className="mt-20 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-center mb-10 text-white">
+          <div className="services-expertise mt-12">
+            <h2 className="text-2xl font-bold text-center mb-10 text-white">
               Automation Tools Expertise
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            </h2>
+            <div className="services-expertise-grid grid gap-4">
               {portfolioData.skills
                 .filter(skill => skill.category === 'Automation')
                 .map((skill, index) => (

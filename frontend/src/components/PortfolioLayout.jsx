@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, ChevronRight, Home, FolderOpen, MessageSquare, UserRound, Layers, Mail, Phone, Linkedin, Menu, X, LayoutGrid } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ChevronRight, Home, FolderOpen, MessageSquare, UserRound, Layers, Mail, Phone, Linkedin, Menu, X, LayoutGrid, Workflow } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { Footer } from './Footer';
 import { FolderPreview } from './FolderPreview';
@@ -9,14 +9,15 @@ const destinations = [
   { title: 'Home', path: '/', icon: Home },
   { title: 'Projects', path: '/projects', icon: FolderOpen, description: 'Automations, integrations & digital experiences' },
   { title: 'Testimonials', path: '/testimonials', icon: MessageSquare, description: 'Words from the people I work with' },
-  { title: 'About', path: '/about', icon: UserRound, description: 'My story, experience & services' },
+  { title: 'About', path: '/about', icon: UserRound, description: 'My story & professional experience' },
+  { title: 'Services', path: '/services', icon: Workflow, description: 'Automation, CRM solutions & integrations' },
   { title: 'Tech Stack', path: '/tech-stack', icon: Layers, description: 'The tools behind the workflows' },
   { title: 'Get in Touch', path: '/contact', icon: Mail, description: 'Start a conversation about your next project' },
 ];
 
 export const LegacyHome = () => {
   const { hash } = useLocation();
-  const legacy = { hero: '/about#hero', home: '/', services: '/about#services', works: '/projects', experience: '/about#experience', testimonials: '/testimonials', contact: '/contact', 'tools-platforms': '/tech-stack' };
+  const legacy = { hero: '/about#hero', home: '/', services: '/services', works: '/projects', experience: '/about#experience', testimonials: '/testimonials', contact: '/contact', 'tools-platforms': '/tech-stack' };
   return legacy[hash.slice(1)] ? <Navigate replace to={legacy[hash.slice(1)]} /> : <HomeExplorer />;
 };
 
@@ -54,13 +55,16 @@ export const FolderCard = ({ title, path, description, icon: Icon = FolderOpen, 
 
 export const FolderGrid = ({ items, showProjectGallery = false }) => <div className={`folder-grid${showProjectGallery ? ' folder-preview-grid' : ''}`}>{items.map((item, index) => <FolderCard key={item.path} {...item} index={index} showProjectGallery={showProjectGallery && Boolean(folderImages[item.path]?.length)} />)}</div>;
 
+const homeFolders = ['/testimonials', '/projects', '/tech-stack', '/services', '/about', '/contact']
+  .map(path => destinations.find(item => item.path === path));
+
 export const HomeExplorer = () => (
   <section className="explorer-page">
     <div className="explorer-eyebrow"><span /> MY PERSONAL WORKSPACE</div>
     <h1>A little about me.<br /><span>A lot of possibilities.</span></h1>
     <p className="explorer-intro">Welcome to my portfolio. Open a folder and explore what I do.</p>
-    <div className="explorer-toolbar"><h2>Explore my portfolio</h2><span><LayoutGrid size={15} /> 5 folders</span></div>
-    <FolderGrid items={destinations.slice(1)} showProjectGallery />
+    <div className="explorer-toolbar"><h2>Explore my portfolio</h2><span><LayoutGrid size={15} /> {homeFolders.length} folders</span></div>
+    <FolderGrid items={homeFolders} showProjectGallery />
     <div className="explorer-note"><span className="status-dot" /> Available for Projects <Link to="/contact">Let’s build something together <ArrowUpRight size={15} /></Link></div>
   </section>
 );

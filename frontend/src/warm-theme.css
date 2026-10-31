@@ -131,23 +131,58 @@ body, button, input, textarea, select, .font-sans, .font-mono, code {
 }
 
 /* The preview uses one card-relative timeline; no CSS animation handoffs. */
-.folder-preview-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.explorer-page:has(.folder-preview-grid) { container: home-folders / inline-size; }
+.folder-preview-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; align-items: stretch; }
+.folder-preview-grid > .folder-card { padding: 18px; }
+.folder-preview-grid .folder-art { width: 100px; height: 76px; margin: 4px 0 14px; }
+.folder-preview-grid .folder-art > svg:last-child { left: 50%; top: 62%; transform: translate(-50%, -50%); }
+/* The spanning card shares the two content-sized rows, never viewport height. */
+@container home-folders (min-width: 620px) {
+  .folder-preview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: 'testimonials projects' 'tech services' 'about contact';
+  }
+  .folder-preview-grid > [href="/testimonials"] { grid-area: testimonials; }
+  .folder-preview-grid > [href="/projects"] { grid-area: projects; }
+  .folder-preview-grid > [href="/tech-stack"] { grid-area: tech; }
+  .folder-preview-grid > [href="/services"] { grid-area: services; }
+  .folder-preview-grid > [href="/about"] { grid-area: about; }
+  .folder-preview-grid > [href="/contact"] { grid-area: contact; }
+}
+@container home-folders (min-width: 900px) {
+  .folder-preview-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: none;
+  }
+  .folder-preview-grid > [href="/testimonials"] { grid-column: 1 / 4; grid-row: 1 / 3; }
+  .folder-preview-grid > [href="/projects"] { grid-column: 4 / 9; grid-row: 1; }
+  .folder-preview-grid > [href="/tech-stack"] { grid-column: 9 / 13; grid-row: 1; }
+  .folder-preview-grid > [href="/services"] { grid-column: 4 / 7; grid-row: 2; }
+  .folder-preview-grid > [href="/about"] { grid-column: 7 / 10; grid-row: 2; }
+  .folder-preview-grid > [href="/contact"] { grid-column: 10 / 13; grid-row: 2; }
+}
+@media (max-width: 767px) {
+  .folder-preview-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: none; }
+  .folder-preview-grid > .folder-card { grid-area: auto; }
+}
 .home-project-card { position: relative; overflow: hidden; isolation: isolate; }
-.home-project-card:is([href="/projects"], [href="/testimonials"]) {
-  align-self: start; padding-bottom: 22px; display: grid;
-  grid-template-columns: minmax(0, 41%) minmax(0, 1fr);
+.home-project-card {
+  display: grid; align-content: start;
+  grid-template-columns: minmax(0, 105px) minmax(0, 1fr);
   grid-template-rows: auto auto 1fr; column-gap: 10px;
 }
 /* An in-flow spacer makes the image stack participate in content sizing. */
-.home-project-card:is([href="/projects"], [href="/testimonials"])::after {
+.home-project-card::after {
   content: ''; grid-column: 2; grid-row: 1 / 4;
   height: var(--preview-stack-height, 0px); pointer-events: none;
 }
-.home-project-card:is([href="/projects"], [href="/testimonials"]) > .folder-art { grid-column: 1; grid-row: 1; width: 100%; }
-.home-project-card:is([href="/projects"], [href="/testimonials"]) > .folder-label { grid-column: 1; grid-row: 2; width: 100%; }
-.home-project-card:is([href="/projects"], [href="/testimonials"]) > .folder-description { grid-column: 1; grid-row: 3; width: 100%; align-self: start; }
-.home-project-card > :is(.folder-art, .folder-label, .folder-description) { width: 41%; max-width: 120px; min-width: 0; }
-.home-project-card .folder-art { max-width: 120px; height: auto; aspect-ratio: 160 / 116; position: relative; z-index: 3; transform: none; margin-top: var(--preview-launch-margin, 4px); }
+.home-project-card > .folder-art { grid-column: 1; grid-row: 1; width: 100%; }
+.home-project-card > .folder-label { grid-column: 1; grid-row: 2; width: 100%; }
+.home-project-card > .folder-description { grid-column: 1; grid-row: 3; width: 100%; align-self: start; }
+.home-project-card > :is(.folder-art, .folder-label, .folder-description) { max-width: 120px; min-width: 0; }
+.home-project-card .folder-art { max-width: 120px; height: auto; aspect-ratio: 160 / 116; position: relative; z-index: 3; transform: none; margin-top: 4px; }
 .home-project-card .folder-art > svg:last-child { left: 50%; top: 62%; transform: translate(-50%, -50%); }
 .home-project-card .folder-label { gap: 4px; }
 .home-project-card .folder-label > svg { width: 12px; flex-shrink: 0; }
@@ -163,3 +198,69 @@ body, button, input, textarea, select, .font-sans, .font-mono, code {
 .folder-preview-image > img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
 .folder-preview-play { position: absolute; inset: 0; display: grid; place-items: center; }
 .folder-preview-play svg { width: 28px; height: 28px; padding: 7px; border-radius: 50%; color: white; background: #0009; fill: white; }
+
+/* Homepage polish: all decoration stays outside the sizing calculations. */
+.folder-preview-grid > .folder-card {
+  position: relative;
+  isolation: isolate;
+  transition: transform 240ms cubic-bezier(.2,.7,.2,1), box-shadow 240ms ease, border-color 240ms ease, background 240ms ease;
+}
+.folder-preview-grid > .folder-card:is(:hover, :focus-visible) {
+  transform: translateY(-3px);
+  border-color: #D9AA94;
+  box-shadow: 0 3px 7px #61412d06, 0 12px 26px #61412d10;
+}
+.folder-preview-grid > .home-project-card > :is(.folder-art, .folder-label, .folder-description) {
+  transform: translateY(var(--folder-content-offset, 0px));
+}
+.folder-preview-grid .folder-preview-image {
+  box-shadow: 0 0 0 1px #7c625314, 0 3px 8px #4733250a;
+}
+.folder-preview-grid > [href="/tech-stack"] .folder-preview-image {
+  border-radius: 12px;
+  background: #FAF9F6;
+  box-shadow: inset 0 0 0 1px #EAE5DC, 0 3px 8px #47332505;
+}
+.folder-preview-grid > [href="/tech-stack"] .folder-preview-image > img { padding: 5px; }
+/* A quiet connected-dot motif echoes the automation work without adding text. */
+.folder-preview-grid > :is([href="/services"], [href="/about"], [href="/contact"])::before {
+  content: ''; position: absolute; pointer-events: none;
+  width: 45px; height: 1px; right: 30px; top: 48px;
+  background: #E8D6C9;
+}
+.folder-preview-grid > :is([href="/services"], [href="/about"], [href="/contact"])::after {
+  content: ''; position: absolute; pointer-events: none;
+  width: 7px; height: 7px; right: 28px; top: 45px;
+  border: 1px solid #DDB79E; border-radius: 50%; background: #FAF1E9;
+  box-shadow: -22px 0 0 -1px #E8D6C9, -44px 0 0 -1px #E8D6C9;
+}
+.folder-preview-grid > :is([href="/services"], [href="/about"], [href="/contact"]) .folder-art { transition: transform 240ms ease; }
+.folder-preview-grid > :is([href="/services"], [href="/about"], [href="/contact"]):is(:hover, :focus-visible) .folder-art { transform: translateY(-2px) rotate(-2deg); }
+@media (prefers-reduced-motion: reduce) {
+  .folder-preview-grid > .folder-card { transition: none; }
+  .folder-preview-grid > .folder-card:is(:hover, :focus-visible),
+  .folder-preview-grid > :is([href="/services"], [href="/about"], [href="/contact"]):is(:hover, :focus-visible) .folder-art { transform: none; }
+}
+
+/* Dedicated Services page: use the panel width, including its sidebar offset. */
+.services-page { container: services-content / inline-size; }
+.workspace-content #services h1 { font-size: clamp(28px, 3.3vw, 46px); letter-spacing: -.6px; }
+.workspace-content #services .services-offerings-grid { grid-template-columns: minmax(0, 1fr); }
+.workspace-content #services .services-expertise-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.services-offerings-grid > *, .services-expertise-grid > * { min-width: 0; }
+.services-expertise-grid > div { padding: 20px 12px; }
+@container services-content (min-width: 620px) {
+  .workspace-content #services .services-offerings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .services-offerings-grid > :first-child { grid-column: 1 / -1; }
+  .services-offerings-grid > :first-child ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 20px; }
+  .services-offerings-grid > :first-child ul > li { margin-top: 0; }
+  .workspace-content #services .services-expertise-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@container services-content (min-width: 1080px) {
+  .workspace-content #services .services-offerings-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .services-offerings-grid > * { grid-column: span 2; }
+  .services-offerings-grid > :first-child { grid-column: span 2; }
+  .services-offerings-grid > :nth-last-child(-n+2) { grid-column: span 3; }
+  .services-offerings-grid > :first-child ul { display: block; }
+  .services-offerings-grid > :first-child ul > li + li { margin-top: 8px; }
+}

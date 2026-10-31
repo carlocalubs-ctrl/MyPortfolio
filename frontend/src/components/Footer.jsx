@@ -8,7 +8,7 @@ export const Footer = () => {
 
   const navigate = useNavigate();
   const scrollToSection = (sectionId) => {
-    const destinations = { home: '/', services: '/about#services', experience: '/about#experience', works: '/projects', testimonials: '/testimonials', contact: '/contact' };
+    const destinations = { home: '/', services: '/services', experience: '/about#experience', works: '/projects', testimonials: '/testimonials', contact: '/contact' };
     navigate(destinations[sectionId] || '/');
   };
 
