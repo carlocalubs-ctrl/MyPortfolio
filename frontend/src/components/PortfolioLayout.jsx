@@ -3,7 +3,7 @@ import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, ChevronRight, Home, FolderOpen, MessageSquare, UserRound, Layers, Mail, Phone, Linkedin, Menu, X, LayoutGrid, Workflow } from 'lucide-react';
 import { portfolioData } from '../mockData';
 import { Footer } from './Footer';
-import { FolderPreview } from './FolderPreview';
+import { AnimatedWorkflowBackground } from './AnimatedWorkflowBackground';
 
 const destinations = [
   { title: 'Home', path: '/', icon: Home },
@@ -21,42 +21,79 @@ export const LegacyHome = () => {
   return legacy[hash.slice(1)] ? <Navigate replace to={legacy[hash.slice(1)]} /> : <HomeExplorer />;
 };
 
-const projectThumbnails = [
-  { src: '/gohighlevel-thumbnail.png', width: 1600, height: 900 },
-  { src: '/projects/thumbnail/THUMBNAIL%20MAKE.png', width: 1672, height: 941 },
-  { src: '/projects/thumbnail/THUMBNAIL%20n8n.png', width: 1672, height: 941 },
-  { src: '/projects/thumbnail/THUMBNAIL%20SALES%20FUNNEL.png', width: 1672, height: 941 },
-  { src: '/projects/thumbnail/THUMBNAIL%20ZAPIER.png', width: 1672, height: 941 },
-];
+const FolderSurface = () => (
+  <svg className="home-folder-shape" viewBox="0 0 400 174" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M20 0H282Q294 0 298 12L302 20Q306 28 318 28H380Q400 28 400 48V154Q400 174 380 174H20Q0 174 0 154V20Q0 0 20 0Z" />
+      <path className="home-folder-highlight" d="M1 20Q1 1 20 1H282Q293 1 297 12L301 20Q306 29 318 29H380Q399 29 399 48" />
+    </svg>
+);
 
-const testimonialThumbnails = [
-  { src: '/projects/thumbnail/kameron-testimonial.jpg', video: true },
-  { src: '/projects/thumbnail/MY%20PICTURE.jpg' },
-];
-
-const folderImages = {
-  '/projects': projectThumbnails,
-  '/testimonials': testimonialThumbnails,
-  '/tech-stack': ['GoHighLevel.svg', 'n8n.svg', 'Make.svg', 'Zapier_.svg', 'Claude.svg', 'Twilio.svg']
-    .map((name) => ({ src: '/projects/Logo/' + name })),
+const projectFolderLabels = {
+  '/projects/gohighlevel': 'CRM & Funnels',
+  '/projects/n8n': 'Workflow Automation',
+  '/projects/zapier': 'Multi-step Automations',
+  '/projects/make': 'Scenario-based Flows',
+  '/projects/funnels': 'Lead Conversion',
+  '/projects/websites': 'Web Projects',
 };
 
-export const FolderCard = ({ title, path, description, icon: Icon = FolderOpen, index = 0, showProjectGallery = false }) => (
-  <Link to={path} className={`folder-card${showProjectGallery ? ' home-project-card' : ''}`} style={{ '--folder-hue': [170, 194, 160, 215, 178, 190][index % 6] }}>
-    <div className="folder-art" aria-hidden="true">
-      <svg viewBox="0 0 160 116" fill="none"><path d="M8 24a10 10 0 0 1 10-10h39l15 15h70a10 10 0 0 1 10 10v60a9 9 0 0 1-9 9H17a9 9 0 0 1-9-9Z" className="folder-back" /><path d="M8 47a10 10 0 0 1 10-10h124a10 10 0 0 1 10 10v52a9 9 0 0 1-9 9H17a9 9 0 0 1-9-9Z" className="folder-front" /><path d="M20 38h120" stroke="white" strokeOpacity=".3" /></svg>
-      <Icon size={25} strokeWidth={1.5} />
+export const FolderCard = ({ title, path, description }) => (
+  <Link to={path} className="home-folder project-category-folder" aria-labelledby={`category-${path.slice(1).replaceAll('/', '-')}`} aria-describedby={`category-${path.slice(1).replaceAll('/', '-')}-description`}>
+    <FolderSurface />
+    <div className="home-folder-top" aria-hidden="true">
+      <FolderOpen className="home-folder-icon" size={20} strokeWidth={1.5} />
+      <ArrowUpRight className="home-folder-arrow" size={18} strokeWidth={1.5} />
     </div>
-    <span className="folder-label">{title}<ArrowUpRight size={16} /></span>
-    <span className="folder-description">{description}</span>
-    {showProjectGallery && <FolderPreview images={folderImages[path]} testimonial={path === '/testimonials'} />}
+    <h3 id={`category-${path.slice(1).replaceAll('/', '-')}`} className="home-folder-title">{title}</h3>
+    <p id={`category-${path.slice(1).replaceAll('/', '-')}-description`} className="home-folder-description">{description}</p>
+    <span className="home-folder-description project-category-label">{projectFolderLabels[path]}</span>
   </Link>
 );
 
-export const FolderGrid = ({ items, showProjectGallery = false }) => <div className={`folder-grid${showProjectGallery ? ' folder-preview-grid' : ''}`}>{items.map((item, index) => <FolderCard key={item.path} {...item} index={index} showProjectGallery={showProjectGallery && Boolean(folderImages[item.path]?.length)} />)}</div>;
+export const FolderGrid = ({ items }) => <div className="portfolio-folder-grid project-folder-grid">{items.map(item => <FolderCard key={item.path} {...item} />)}</div>;
+
+const HomeFolder = ({ title, path, description, statistic, label = title, callout = false, icon: Icon }) => (
+  <Link to={path} className="home-folder" aria-labelledby={`folder-${path.slice(1)}`} aria-describedby={`folder-${path.slice(1)}-description`}>
+    <FolderSurface />
+    <div className="home-folder-top" aria-hidden="true">
+      <Icon className="home-folder-icon" size={22} strokeWidth={1.5} />
+      <ArrowUpRight className="home-folder-arrow" size={18} strokeWidth={1.5} />
+    </div>
+    <h3 id={`folder-${path.slice(1)}`} className="home-folder-title">
+      <span className={`home-folder-statistic${callout ? ' home-folder-callout' : ''}`}>{statistic}</span>
+      <span className="home-folder-label">{label}</span>
+    </h3>
+    <p id={`folder-${path.slice(1)}-description`} className="home-folder-description">{description}</p>
+  </Link>
+);
+
+// Testimonials.jsx renders one featured written entry plus Kameron's video.
+const testimonialCount = portfolioData.testimonials.filter(item => !item.featured).length
+  + (portfolioData.testimonials.some(item => item.featured) ? 2 : 0);
+// Verified against the 10 + 15 named platforms rendered by ToolsPlatforms.jsx.
+const technologyCount = 25;
+const homeFolderHighlights = {
+  '/testimonials': { statistic: testimonialCount },
+  '/projects': { statistic: '20+' },
+  '/tech-stack': { statistic: technologyCount, label: 'Technologies' },
+  '/services': { statistic: portfolioData.services.length },
+  '/about': { statistic: 'My Story', callout: true },
+  '/contact': { statistic: "Let's Talk", callout: true },
+};
 
 const homeFolders = ['/testimonials', '/projects', '/tech-stack', '/services', '/about', '/contact']
-  .map(path => destinations.find(item => item.path === path));
+  .map((path, index) => ({
+    ...destinations.find(item => item.path === path),
+    ...homeFolderHighlights[path],
+    description: [
+      'Client feedback and experiences.',
+      'Automation workflows, CRM systems, and websites.',
+      'Tools and technologies behind my work.',
+      'AI automation, CRM, and integration solutions.',
+      'My story and professional experience.',
+      "Let's discuss your next project.",
+    ][index],
+  }));
 
 export const HomeExplorer = () => (
   <section className="explorer-page">
@@ -64,7 +101,7 @@ export const HomeExplorer = () => (
     <h1>A little about me.<br /><span>A lot of possibilities.</span></h1>
     <p className="explorer-intro">Welcome to my portfolio. Open a folder and explore what I do.</p>
     <div className="explorer-toolbar"><h2>Explore my portfolio</h2><span><LayoutGrid size={15} /> {homeFolders.length} folders</span></div>
-    <FolderGrid items={homeFolders} showProjectGallery />
+    <div className="portfolio-folder-grid">{homeFolders.map(item => <HomeFolder key={item.path} {...item} />)}</div>
     <div className="explorer-note"><span className="status-dot" /> Available for Projects <Link to="/contact">Let’s build something together <ArrowUpRight size={15} /></Link></div>
   </section>
 );
@@ -113,6 +150,7 @@ export const PortfolioLayout = () => {
   }, [location.pathname, location.hash]);
   return (
     <div className="portfolio-workspace">
+      <AnimatedWorkflowBackground />
       <a className="workspace-skip" href="#workspace-content">Skip to content</a>
       <aside className={`workspace-sidebar ${menuOpen ? 'is-open' : ''}`}>
         <Link className="workspace-brand" to="/">JC<span> / PORTFOLIO</span></Link>
