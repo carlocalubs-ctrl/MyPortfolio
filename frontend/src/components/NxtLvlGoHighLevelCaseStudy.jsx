@@ -14,8 +14,14 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { ScrollReveal } from "../hooks/useScrollReveal";
+import { ProjectWalkthrough } from "./ProjectWalkthrough";
 
 const assetRoot = "/projects/Gohighlevel/Nxt Lvl Detail";
+const walkthroughVideo = {
+  src: `${assetRoot}/Nxt Mobile Detail Walkthrough.mp4`,
+  type: "video/mp4",
+  title: "Nxtlvl Mobile Detail — Project Walkthrough",
+};
 const technologies = ["GoHighLevel", "CRM", "Pipelines", "Calendars", "Custom Fields", "Automation", "A2P", "SMS"];
 
 const sections = [
@@ -83,6 +89,21 @@ const sections = [
         label: "Native GoHighLevel automation",
         alt: "GoHighLevel native workflow automation for lead processing and follow-up",
       },
+      {
+        src: `${assetRoot}/Zapier Automation.png`,
+        label: "Fieldd customer and contact integration",
+        alt: "Zapier automation connecting Fieldd customer data to GoHighLevel contacts",
+      },
+      {
+        src: `${assetRoot}/Zapier Automation Booking.png`,
+        label: "Fieldd booking integration",
+        alt: "Zapier automation connecting Fieldd booking data to GoHighLevel",
+      },
+      {
+        type: "video",
+        src: `${assetRoot}/Zapier Automation from Fieldd co to GhL.mp4`,
+        label: "Fieldd to GoHighLevel integration demo",
+      },
     ],
   },
   {
@@ -126,9 +147,12 @@ const sections = [
   },
 ];
 
+const orderedSections = ["architecture", "automation", "forms", "fields", "calendar", "sms"]
+  .map((id) => sections.find((section) => section.id === id));
+
 export const NxtLvlGoHighLevelCaseStudy = () => {
   const [activeScreenshot, setActiveScreenshot] = useState(null);
-  const screenshots = sections.flatMap((section) => section.visuals);
+  const screenshots = orderedSections.flatMap((section) => section.visuals).filter((visual) => visual.type !== "video");
 
   useEffect(() => {
     document.title = "CRM Specialist & Booking Integration | John Carlo R. Calubiran";
@@ -221,7 +245,12 @@ export const NxtLvlGoHighLevelCaseStudy = () => {
           </section>
 
           <div className="space-y-8 pb-16">
-            {sections.map((section, sectionIndex) => {
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-6xl">
+                <ProjectWalkthrough video={walkthroughVideo} />
+              </div>
+            </div>
+            {orderedSections.map((section, sectionIndex) => {
               const Icon = section.icon;
               return (
                 <section key={section.id} id={section.id} className="scroll-mt-28 py-4">
@@ -240,6 +269,11 @@ export const NxtLvlGoHighLevelCaseStudy = () => {
                           {section.visuals.map((visual) => (
                             <div key={visual.src} className="space-y-3">
                               <div className="text-sm font-semibold text-white">{visual.label}</div>
+                              {visual.type === "video" ? (
+                                <video aria-label={visual.label} controls preload="metadata" playsInline className="block h-auto w-full max-w-full rounded-lg border border-slate-700 bg-black object-contain">
+                                  <source src={visual.src} type="video/mp4" />
+                                </video>
+                              ) : (
                               <button
                                 type="button"
                                 onClick={() => setActiveScreenshot(visual)}
@@ -247,6 +281,7 @@ export const NxtLvlGoHighLevelCaseStudy = () => {
                               >
                                 <img src={visual.src} alt={visual.alt} className="mx-auto block h-auto max-h-[680px] w-full object-contain object-center" loading="lazy" />
                               </button>
+                              )}
                             </div>
                           ))}
                         </CardContent>

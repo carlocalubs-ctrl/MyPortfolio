@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import { Link } from "react-router-dom";
 import { ArrowRight, Code2, PlayCircle, X } from "lucide-react";
 import { Button } from "./ui/button";
@@ -83,6 +83,17 @@ export const ProjectCard = ({ project }) => {
   const isClickable = Boolean(project.path);
   const hasDemo = Boolean(project.demoUrl);
   const hasDemoPath = Boolean(project.demoPath);
+  const directDemoVideo = project.cardDemoVideo || project.walkthroughVideo;
+  const modalVideo = directDemoVideo || project.demoVideo;
+  const usesVideoModal = Boolean(directDemoVideo || (project.demoVideo && !hasDemo && !hasDemoPath));
+
+  const openDemo = () => {
+    // Mount and request playback within the click's user activation.
+    flushSync(() => setIsDemoOpen(true));
+    videoRef.current?.play().catch(() => {
+      // Native controls remain available if the browser declines playback.
+    });
+  };
 
   useEffect(() => {
     if (!isDemoOpen) return undefined;
@@ -124,6 +135,9 @@ export const ProjectCard = ({ project }) => {
         <CardTitle className="pt-2 text-2xl text-white">
           {project.title}
         </CardTitle>
+        {project.category && (
+          <p className="text-sm font-medium text-teal-300">{project.category}</p>
+        )}
         <CardDescription className="text-base leading-relaxed text-slate-400">
           {project.description}
         </CardDescription>
@@ -141,7 +155,7 @@ export const ProjectCard = ({ project }) => {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            {hasDemo && (
+            {hasDemo && !usesVideoModal && (
               <Button
                 asChild
                 variant="outline"
@@ -153,18 +167,18 @@ export const ProjectCard = ({ project }) => {
                 </a>
               </Button>
             )}
-            {project.demoVideo && !hasDemo && !hasDemoPath && (
+            {usesVideoModal && (
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setIsDemoOpen(true)}
+                onClick={openDemo}
                 className="border-slate-700 px-6 text-slate-300 hover:bg-slate-800 hover:text-white"
               >
                 <PlayCircle className="mr-2 h-4 w-4" />
                 Watch Demo
               </Button>
             )}
-            {!hasDemo && hasDemoPath && (
+            {!hasDemo && hasDemoPath && !usesVideoModal && (
               <Button
                 asChild
                 variant="outline"
@@ -187,7 +201,7 @@ export const ProjectCard = ({ project }) => {
           </Button>
         )}
       </CardContent>
-      {isDemoOpen && project.demoVideo && createPortal(
+      {isDemoOpen && modalVideo && createPortal(
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-md sm:p-8"
           role="dialog"
@@ -207,8 +221,8 @@ export const ProjectCard = ({ project }) => {
             className="w-full max-w-5xl overflow-hidden rounded-lg border border-slate-700 bg-slate-900 shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
-            <video ref={videoRef} controls preload="metadata" playsInline className="block h-auto w-full">
-              <source src={project.demoVideo.src} type={project.demoVideo.type} />
+            <video ref={videoRef} controls preload="metadata" playsInline className="block h-auto max-h-[80vh] w-full object-contain">
+              <source src={modalVideo.src} type={modalVideo.type} />
               Your browser does not support the video tag.
             </video>
           </div>

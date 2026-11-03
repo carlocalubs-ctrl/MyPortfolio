@@ -13,6 +13,7 @@ import {
 import { ScrollReveal } from "../hooks/useScrollReveal";
 import { portfolioData } from "../mockData";
 import { ProjectStatusBadge, ProjectTags } from "./ProjectCards";
+import { ProjectWalkthrough } from "./ProjectWalkthrough";
 
 const detailSections = {
   funnels: ["Desktop Screenshots", "Mobile Screenshots", "Project Description", "Platform Used", "Live Link"],
@@ -28,17 +29,17 @@ const findProject = (categoryId, projectSlug) => {
   return { category, project };
 };
 
-const ProjectScreenshot = ({ screenshot, index, onOpen }) => (
+const ProjectScreenshot = ({ screenshot, index, onOpen, uniform = false }) => (
   <button
     type="button"
     onClick={() => onOpen(index)}
     className="project-screenshot-trigger group w-full overflow-hidden rounded-lg border border-slate-700 bg-slate-900/70 transition-all duration-300 hover:border-teal-500/60"
   >
-    <div className="flex min-h-[260px] items-center justify-center p-3 sm:p-4">
+    <div className={screenshot.fullWidth ? "flex items-center justify-center p-3 sm:p-4" : uniform ? "flex aspect-[16/10] items-center justify-center p-3 sm:p-4" : "flex min-h-[260px] items-center justify-center p-3 sm:p-4"}>
       <img
         src={screenshot.src}
         alt={screenshot.alt}
-        className="h-auto max-h-[620px] w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"
+        className={screenshot.fullWidth ? "block h-auto w-full max-w-full object-contain object-center" : uniform ? "h-full w-full object-contain object-center" : "h-auto max-h-[620px] w-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.01]"}
         loading="lazy"
       />
     </div>
@@ -174,6 +175,7 @@ export const ProjectDetailPage = () => {
     ? detailSections[categoryId]
     : null;
   const isFunnelProject = categoryId === "funnels" && screenshots.length > 0;
+  const screenshotSections = [...new Set(screenshots.map((screenshot) => screenshot.section).filter(Boolean))];
 
   return (
     <div className="min-h-screen relative" style={{ background: "#0f172a" }}>
@@ -191,6 +193,9 @@ export const ProjectDetailPage = () => {
 
               <ScrollReveal>
                 <div className="mx-auto max-w-5xl text-center">
+                  {project.overviewMedia && (
+                    <img src={project.image} alt={`${project.title} logo`} className="mx-auto mb-6 h-24 w-full max-w-xs object-contain object-center" />
+                  )}
                   <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-teal-500/20 bg-slate-800/50 px-4 py-2 text-sm text-slate-300 backdrop-blur-sm">
                     <span className="text-xs font-mono text-teal-300">
                       PROJECT {project.id}
@@ -202,9 +207,17 @@ export const ProjectDetailPage = () => {
                       {project.title}
                     </span>
                   </h1>
+                  {project.detailCategory && (
+                    <p className="mb-5 text-lg font-semibold text-teal-300">{project.detailCategory}</p>
+                  )}
                   <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400">
-                    {project.description}
+                    {project.overview || project.description}
                   </p>
+                  {project.overviewMedia && project.demoVideo && (
+                    <video id="demo" controls preload="metadata" playsInline className="mx-auto mt-8 h-auto w-full max-w-4xl rounded-lg border border-slate-700 bg-black">
+                      <source src={project.demoVideo.src} type={project.demoVideo.type} />
+                    </video>
+                  )}
                   <div className="mx-auto mt-8 flex max-w-3xl justify-center">
                     <ProjectTags tags={project.technologies} />
                   </div>
@@ -216,6 +229,9 @@ export const ProjectDetailPage = () => {
           <section className="pb-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mx-auto max-w-6xl space-y-8">
+                {project.walkthroughVideo && (
+                  <ProjectWalkthrough video={project.walkthroughVideo} />
+                )}
                 {fallbackSections?.map((section, index) => (
                   <ScrollReveal key={section} delay={index * 80}>
                     <Card className="h-full border-slate-700 bg-slate-800/50 backdrop-blur-sm">
@@ -262,7 +278,34 @@ export const ProjectDetailPage = () => {
                   </ScrollReveal>
                 )}
 
-                {!isFunnelProject && screenshots.length > 0 && (
+                {screenshotSections.map((section) => (
+                  <ScrollReveal key={section}>
+                    <Card className="border-slate-700 bg-slate-800/50 backdrop-blur-sm">
+                      <CardHeader>
+                        <CardTitle className="text-2xl text-white">{section}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        {screenshots.map((screenshot, index) => screenshot.section === section && (
+                          <div key={screenshot.src} className={screenshot.fullWidth ? "min-w-0 space-y-3 md:col-span-2" : "space-y-3"}>
+                            <h3 className="text-lg font-semibold text-white">{screenshot.label}</h3>
+                            {!screenshot.descriptionBelowImage && screenshot.description && (
+                              <p className="text-sm leading-relaxed text-slate-400">{screenshot.description}</p>
+                            )}
+                            <ProjectScreenshot screenshot={screenshot} index={index} onOpen={setActiveIndex} uniform />
+                            {screenshot.descriptionBelowImage && screenshot.description && (
+                              <p className="text-sm leading-relaxed text-slate-400">{screenshot.description}</p>
+                            )}
+                            {screenshot.explanation && (
+                              <p className="text-sm leading-relaxed text-slate-400">{screenshot.explanation}</p>
+                            )}
+                          </div>
+                        ))}
+                      </CardContent>
+                    </Card>
+                  </ScrollReveal>
+                ))}
+
+                {!isFunnelProject && screenshotSections.length === 0 && screenshots.length > 0 && (
                   <ScrollReveal>
                     <Card className="border-slate-700 bg-slate-800/50 backdrop-blur-sm">
                       <CardHeader>
@@ -304,7 +347,7 @@ export const ProjectDetailPage = () => {
                   </ScrollReveal>
                 )}
 
-                {project.demoVideo && (
+                {project.demoVideo && !project.overviewMedia && (
                   <ScrollReveal delay={80}>
                     <Card id="demo" className="border-slate-700 bg-slate-800/50 backdrop-blur-sm scroll-mt-28">
                       <CardHeader>

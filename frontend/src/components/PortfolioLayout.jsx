@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight, ChevronRight, Home, FolderOpen, MessageSquare,
 import { portfolioData } from '../mockData';
 import { Footer } from './Footer';
 import { AnimatedWorkflowBackground } from './AnimatedWorkflowBackground';
+import { CompanyStrip } from './CompanyStrip';
 
 const destinations = [
   { title: 'Home', path: '/', icon: Home },
@@ -160,7 +161,7 @@ export const PortfolioLayout = () => {
         <div className="sidebar-bottom"><span className="status-dot" /> Built around possibilities.<small>© {new Date().getFullYear()} {portfolioData.name}</small></div>
       </aside>
       <div className="workspace-main">
-        <header className="workspace-topbar"><nav aria-label="Breadcrumb"><ol>{crumbs.map((crumb, index) => <li key={crumb.path}>{index > 0 && <ChevronRight size={14} />}{index === crumbs.length - 1 ? <span aria-current="page">{crumb.title}</span> : <Link to={crumb.path}>{crumb.title}</Link>}</li>)}</ol></nav><span className="workspace-topbar-label">PORTFOLIO EXPLORER</span></header>
+        <header className={`workspace-topbar${location.pathname === "/" ? " workspace-topbar-home" : ""}`}>{location.pathname !== "/" && <nav aria-label="Breadcrumb"><ol>{crumbs.map((crumb, index) => <li key={crumb.path}>{index > 0 && <ChevronRight size={14} />}{index === crumbs.length - 1 ? <span aria-current="page">{crumb.title}</span> : <Link to={crumb.path}>{crumb.title}</Link>}</li>)}</ol></nav>}{location.pathname === "/" ? <CompanyStrip /> : <span className="workspace-topbar-label">PORTFOLIO EXPLORER</span>}</header>
         <main id="workspace-content" ref={panelRef} tabIndex={-1} className="workspace-content">
           {location.pathname !== '/' && <Link className="workspace-back" to={crumbs.at(-2)?.path || '/'}><ArrowLeft size={15} /> Back to {crumbs.at(-2)?.title || 'Home'}</Link>}
           <Outlet />

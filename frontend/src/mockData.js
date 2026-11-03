@@ -216,7 +216,11 @@ export const portfolioData = {
           image: "/projects/Gohighlevel/Nxt Lvl Detail/NXT LVL DETAIL LOGO.jpg",
           thumbnailStyle: "logo",
           technologies: ["GoHighLevel", "CRM", "Pipelines", "Calendars", "Automation", "A2P", "SMS"],
-          path: "/projects/gohighlevel/nxt-lvl-crm-booking-integration"
+          path: "/projects/gohighlevel/nxt-lvl-crm-booking-integration",
+          cardDemoVideo: {
+            src: "/projects/Gohighlevel/Nxt Lvl Detail/Nxt Mobile Detail Walkthrough.mp4",
+            type: "video/mp4"
+          }
         },
         {
           id: "02",
@@ -228,16 +232,87 @@ export const portfolioData = {
           technologies: ["GoHighLevel", "CRM", "Funnels", "Pipelines", "Workflows", "Calendars", "Marketing Automation"],
           path: "/projects/gohighlevel-crm-marketing-automation",
           demoPath: "/projects/gohighlevel-crm-marketing-automation#demo",
+          cardDemoVideo: {
+            src: "/projects/Gohighlevel/Solar Demo/Loom/solar-crm-demo.mp4",
+            type: "video/mp4"
+          },
           demoUrl: ""
         },
         {
           id: "03",
-          title: "Coming Soon",
-          description: "More GoHighLevel projects will be added soon.",
-          status: "Coming Soon",
-          image: null,
-          technologies: [],
-          path: null
+          title: "Esstart",
+          description: "GoHighLevel CRM implementation featuring AI agents, conversation automation, sales pipelines, dashboards, and automated workflows.",
+          category: "GoHighLevel CRM & Automation",
+          detailCategory: "GoHighLevel CRM & AI Automation",
+          overview: "Esstart is a GoHighLevel CRM and automation project showcasing AI agents, conversation workflows, pipeline management, campaign automation, and dashboard organization.",
+          status: "Live",
+          image: "/projects/Gohighlevel/Esstart/esstart.jpg.svg",
+          thumbnailStyle: "contain",
+          technologies: ["GoHighLevel", "CRM", "AI Agents", "Pipelines", "Workflows"],
+          path: "/projects/gohighlevel/esstart",
+          walkthroughVideo: {
+            src: "/projects/Gohighlevel/Esstart/Esstart Video.mp4",
+            type: "video/mp4",
+            title: "Esstart Project Walkthrough"
+          },
+          overviewMedia: true,
+          screenshots: [
+            {
+              "section": "AI Agents",
+              "label": "AI Agent",
+              "description": "An AI-powered agent configured to assist with automated interactions, streamline communication, and support member-related processes within GoHighLevel.",
+              "src": "/projects/Gohighlevel/Esstart/Ai Agent.png",
+              "alt": "Esstart AI Agent"
+            },
+            {
+              "section": "AI Agents",
+              "label": "Convo AI Agent",
+              "description": "A conversational AI agent designed to assist with automated conversations and support communication workflows.",
+              "src": "/projects/Gohighlevel/Esstart/Convo AI Agent.png",
+              "alt": "Esstart Convo AI Agent"
+            },
+            {
+              "section": "Workflows & Campaign Automation",
+              "label": "Workflow 1 — User Journey Workflow",
+              "description": "The User Journey Workflow is the main automation system within Esstart. It monitors and manages member and subscriber activity, helping track their journey, important updates, and interactions throughout the platform.",
+              "explanation": "This workflow serves as the central automation process for monitoring member and subscriber information, helping maintain organized records and support timely automated actions.",
+              "descriptionBelowImage": true,
+              "src": "/projects/Gohighlevel/Esstart/User Journey Workflow.png",
+              "alt": "Esstart Workflow 1 — User Journey Workflow"
+            },
+            {
+              "section": "Workflows & Campaign Automation",
+              "label": "Workflow 2 — Never Rebook Campaign",
+              "description": "The Never Rebook Campaign is an automated email campaign workflow designed to engage members or subscribers and manage follow-up communication through a structured email sequence.",
+              "explanation": "This workflow helps organize campaign communication and automate the follow-up process.",
+              "descriptionBelowImage": true,
+              "src": "/projects/Gohighlevel/Esstart/Never Rebook Campaign.png",
+              "alt": "Esstart Workflow 2 — Never Rebook Campaign"
+            },
+            {
+              "section": "Dashboards",
+              "label": "Esstart Dashboard",
+              "description": "An organized GoHighLevel dashboard providing a centralized view of important CRM information and operational data to support monitoring and management.",
+              "src": "/projects/Gohighlevel/Esstart/DASHBOARD ESSTART.png",
+              "alt": "Esstart Esstart Dashboard"
+            },
+            {
+              "section": "Dashboards",
+              "label": "Never Rebook Dashboard",
+              "description": "A campaign monitoring dashboard used to track leads who show interest throughout the Never Rebook email sequence, from Email 1 through Email 9.",
+              "explanation": "This dashboard helps monitor engagement and identify interested leads at different stages of the nine-email campaign, giving the team a clearer view of follow-up opportunities.",
+              "src": "/projects/Gohighlevel/Esstart/Never reBook Dashboard.png",
+              "alt": "Esstart Never Rebook Dashboard"
+            },
+            {
+              "section": "CRM & Pipelines",
+              "label": "CRM Pipeline",
+              "fullWidth": true,
+              "description": "A GoHighLevel pipeline used to organize and monitor leads through their respective stages, providing visibility into the sales and follow-up process.",
+              "src": "/projects/Gohighlevel/Esstart/PIPELINE.png",
+              "alt": "Esstart CRM Pipeline"
+            }
+          ]
         }
       ]
     },
