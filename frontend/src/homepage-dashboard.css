@@ -1,0 +1,75 @@
+/* Desktop homepage only: the carousel takes its natural height; the dashboard
+   shares the remainder. Small/short viewports retain the scrolling layout. */
+@media (min-width: 1280px) and (min-height: 700px) {
+  .portfolio-workspace:has(.home-explorer) { height: 100dvh; min-height: 0; }
+  .portfolio-workspace:has(.home-explorer) .workspace-main { min-height: 0; }
+  .portfolio-workspace:has(.home-explorer) .workspace-sidebar { height: 100%; min-height: 0; }
+  .workspace-content:has(> .home-explorer) {
+    display: flex;
+    min-height: 0;
+    padding: clamp(8px, 1.2dvh, 16px) clamp(20px, 1.7vw, 32px) clamp(16px, 2dvh, 24px);
+    scrollbar-gutter: auto;
+    overflow: hidden;
+  }
+  .explorer-page.home-explorer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    padding-top: 0;
+  }
+  .home-explorer > .explorer-eyebrow { flex-shrink: 0; margin-bottom: clamp(6px, 1dvh, 12px); }
+  .home-explorer > h1 { flex-shrink: 0; font-size: clamp(30px, 4.5dvh, 48px); line-height: 1.1; }
+  .home-explorer > .explorer-intro { flex-shrink: 0; margin-top: clamp(6px, 1dvh, 12px); font-size: 13px; line-height: 1.5; }
+  .home-explorer-body {
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(8px, 1.2dvh, 14px) clamp(20px, 2vw, 36px);
+    margin-top: clamp(12px, 1.8dvh, 22px);
+  }
+  .home-explorer-folders { display: contents; }
+  .home-explorer .explorer-toolbar { grid-area: 1 / 1; margin: 0; padding-bottom: 8px; }
+  .home-explorer .portfolio-folder-grid {
+    grid-area: 2 / 1;
+    min-height: 0;
+    height: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: clamp(12px, 1.8dvh, 22px);
+  }
+  .home-explorer .home-folder { min-height: 0; padding: clamp(28px, 4dvh, 44px) clamp(14px, 1.3vw, 24px) clamp(12px, 1.8dvh, 20px); }
+  .home-explorer .home-folder-top { flex-shrink: 0; margin-bottom: clamp(6px, 1dvh, 12px); }
+  .home-explorer .home-folder-title { gap: clamp(3px, .6dvh, 7px); }
+  .home-explorer .home-folder-statistic { font-size: clamp(40px, 6dvh, 64px); }
+  .home-explorer .home-folder-callout { font-size: clamp(25px, 3.6dvh, 38px); }
+  .home-explorer .home-folder-label { font-size: clamp(15px, 1.8dvh, 19px); line-height: 1.3; }
+  .home-explorer .home-folder-description { margin-top: 6px; font-size: clamp(11px, 1.5dvh, 13px); line-height: 1.45; }
+  .home-explorer .explorer-note { grid-area: 3 / 1; margin: 0; padding: 0; font-size: 10px; }
+  .home-explorer .workflow-highlights { grid-area: 2 / 2; height: 100%; min-height: 0; overflow: hidden; padding: clamp(12px, 1.8dvh, 20px) 14px 10px; }
+  .home-explorer .workflow-highlights-heading, .home-explorer .workflow-highlights-intro { flex-shrink: 0; }
+  .home-explorer .workflow-highlights-intro { margin-top: 10px; font-size: 11px; line-height: 1.6; }
+  .home-explorer .workflow-highlights-window { flex: 1 1 0; height: 100%; min-height: 0; }
+}
+
+/* Keep the full sidebar visible on shorter desktop displays as well. */
+@media (min-width: 1280px) and (min-height: 700px) and (max-height: 900px) {
+  .portfolio-workspace:has(.home-explorer) .workspace-sidebar { padding-block: 18px 14px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-profile { padding-block: 14px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-profile > img { width: 72px; height: 72px; margin-bottom: 10px; }
+  .portfolio-workspace:has(.home-explorer) .profile-status { margin-bottom: 8px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-profile p { margin-top: 6px; font-size: 12px; line-height: 1.5; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-socials { margin-top: 10px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-socials a { min-width: 36px; min-height: 36px; padding: 8px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-navigation { padding-top: 14px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-caption { margin-bottom: 8px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-link { min-height: 42px; padding-block: 8px; margin-bottom: 2px; }
+  .portfolio-workspace:has(.home-explorer) .sidebar-bottom { padding-top: 12px; }
+}
+
+@media (min-width: 1280px) and (max-height: 699px) {
+  .home-explorer-body { grid-template-columns: minmax(0, 1fr); }
+  .home-explorer .workflow-highlights-window { flex: none; height: 440px; min-height: 0; }
+}

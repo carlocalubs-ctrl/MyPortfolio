@@ -5,6 +5,7 @@ import { portfolioData } from '../mockData';
 import { Footer } from './Footer';
 import { AnimatedWorkflowBackground } from './AnimatedWorkflowBackground';
 import { CompanyStrip } from './CompanyStrip';
+import { WorkflowHighlights } from './WorkflowHighlights';
 
 const destinations = [
   { title: 'Home', path: '/', icon: Home },
@@ -54,7 +55,7 @@ export const FolderCard = ({ title, path, description }) => (
 export const FolderGrid = ({ items }) => <div className="portfolio-folder-grid project-folder-grid">{items.map(item => <FolderCard key={item.path} {...item} />)}</div>;
 
 const HomeFolder = ({ title, path, description, statistic, label = title, callout = false, icon: Icon }) => (
-  <Link to={path} className="home-folder" aria-labelledby={`folder-${path.slice(1)}`} aria-describedby={`folder-${path.slice(1)}-description`}>
+  <Link to={path} className={`home-folder${path === '/contact' ? ' home-folder-contact' : ''}`} aria-labelledby={`folder-${path.slice(1)}`} aria-describedby={`folder-${path.slice(1)}-description`}>
     <FolderSurface />
     <div className="home-folder-top" aria-hidden="true">
       <Icon className="home-folder-icon" size={22} strokeWidth={1.5} />
@@ -82,13 +83,13 @@ const homeFolderHighlights = {
   '/contact': { statistic: "Let's Talk", callout: true },
 };
 
-const homeFolders = ['/testimonials', '/projects', '/tech-stack', '/services', '/about', '/contact']
+const homeFolders = ['/projects', '/testimonials', '/tech-stack', '/services', '/about', '/contact']
   .map((path, index) => ({
     ...destinations.find(item => item.path === path),
     ...homeFolderHighlights[path],
     description: [
-      'Client feedback and experiences.',
       'Automation workflows, CRM systems, and websites.',
+      'Client feedback and experiences.',
       'Tools and technologies behind my work.',
       'AI automation, CRM, and integration solutions.',
       'My story and professional experience.',
@@ -97,13 +98,18 @@ const homeFolders = ['/testimonials', '/projects', '/tech-stack', '/services', '
   }));
 
 export const HomeExplorer = () => (
-  <section className="explorer-page">
+  <section className="explorer-page home-explorer">
     <div className="explorer-eyebrow"><span /> MY PERSONAL WORKSPACE</div>
     <h1>A little about me.<br /><span>A lot of possibilities.</span></h1>
     <p className="explorer-intro">Welcome to my portfolio. Open a folder and explore what I do.</p>
+    <div className="home-explorer-body">
+    <div className="home-explorer-folders">
     <div className="explorer-toolbar"><h2>Explore my portfolio</h2><span><LayoutGrid size={15} /> {homeFolders.length} folders</span></div>
     <div className="portfolio-folder-grid">{homeFolders.map(item => <HomeFolder key={item.path} {...item} />)}</div>
     <div className="explorer-note"><span className="status-dot" /> Available for Projects <Link to="/contact">Let’s build something together <ArrowUpRight size={15} /></Link></div>
+    </div>
+    <WorkflowHighlights />
+    </div>
   </section>
 );
 

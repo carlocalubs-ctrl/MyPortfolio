@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { PortfolioLayout, HomeExplorer, ProjectsExplorer, LegacyHome, WebsitesPage } from "@/components/PortfolioLayout";
 import "@/workspace.css";
 import "@/warm-theme.css";
+import "@/homepage-dashboard.css";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
 import { ToolsPlatforms } from "@/components/ToolsPlatforms";

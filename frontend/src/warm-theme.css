@@ -162,6 +162,14 @@ body, button, input, textarea, select, .font-sans, .font-mono, code {
 .home-folder:is(:hover, :focus-visible) .home-folder-description { color: #d4d4d4; }
 .home-folder:is(:hover, :focus-visible) .home-folder-arrow { transform: translate(2px, -2px); }
 .home-folder:focus-visible { outline: 2px solid #714630; outline-offset: 5px; }
+/* The contact folder reverses the shared palette, including its SVG tab. */
+.home-folder.home-folder-contact .home-folder-shape { fill: #171717; }
+.home-folder.home-folder-contact :is(.home-folder-title, .home-folder-description, .home-folder-icon, .home-folder-arrow) { color: #FFFFFF; }
+.home-folder.home-folder-contact:is(:hover, :focus-visible) .home-folder-shape { fill: #F2C7AD; }
+.home-folder.home-folder-contact:is(:hover, :focus-visible) :is(.home-folder-title, .home-folder-description, .home-folder-icon, .home-folder-arrow) { color: #292524; }
+@media (prefers-reduced-motion: no-preference) {
+  .home-folder-contact :is(.home-folder-shape, .home-folder-highlight, .home-folder-title, .home-folder-description, .home-folder-icon, .home-folder-arrow) { transition-duration: 300ms; }
+}
 /* Project categories share the homepage surface, with descriptive content. */
 .portfolio-folder-grid.project-folder-grid { gap: 28px; }
 .project-category-folder .home-folder-title { font-size: 22px; line-height: 1.35; letter-spacing: -.4px; }
